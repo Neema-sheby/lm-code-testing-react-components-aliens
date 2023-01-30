@@ -2,11 +2,17 @@ interface InputProp {
   id: string;
   label: string;
   type: string;
-  value: string;
+  value: string | number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: React.FC<InputProp> = ({ id, label, type, value, onChange }) => {
+const W12MInput: React.FC<InputProp> = ({
+  id,
+  label,
+  type,
+  value,
+  onChange,
+}) => {
   return (
     <>
       <label htmlFor={id}>{label}</label>
@@ -15,4 +21,4 @@ const Input: React.FC<InputProp> = ({ id, label, type, value, onChange }) => {
   );
 };
 
-export default Input;
+export default W12MInput;

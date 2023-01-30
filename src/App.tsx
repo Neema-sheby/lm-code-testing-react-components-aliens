@@ -1,13 +1,14 @@
-import './App.css';
-import W12MForm from './components/W12MForm';
+import "./App.css";
+import W12MHeader from "./components/Header/W12MHeader";
+import W12MForm from "./components/Form/W12MForm";
 
 function App() {
-	return (
-		<>
-			<h1>W-12-M :- APPLICATION TO SPARE PLANET FROM DESTRUCTION</h1>
-			<W12MForm />
-		</>
-	);
+  return (
+    <div className="w12MForm">
+      <W12MHeader />
+      <W12MForm />
+    </div>
+  );
 }
 
 export default App;

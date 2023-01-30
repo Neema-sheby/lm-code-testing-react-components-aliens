@@ -1,11 +1,12 @@
+import React from "react";
+
 interface ButtonProp {
-  value: string;
-  type: string;
   children: React.ReactNode;
+  onClick: () => void;
 }
 
-const W12Button: React.FC<ButtonProp> = ({ value, type, children }) => {
-  return <button type={type}>{children}</button>;
+const W12Button: React.FC<ButtonProp> = ({ children, onClick }) => {
+  return <button onClick={onClick}>{children}</button>;
 };
 
 export default W12Button;

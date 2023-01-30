@@ -1,13 +1,13 @@
 import React from "react";
 
-interface selectProp {
+interface SelectProp {
   id: string;
   value: string;
   children: React.ReactNode;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const W12MSelect: React.FC<selectProp> = ({
+const W12MSelect: React.FC<SelectProp> = ({
   id,
   value,
   onChange,

@@ -38,7 +38,7 @@ const W12MForm: React.FC = () => {
       <form className="form" onSubmit={(e) => onSubmitHandler(e)}>
         <W12MInput
           id="Species-name"
-          label="Species Name"
+          label="Species Name : "
           type="text"
           value={species}
           placeholder="Enter the species name"
@@ -46,7 +46,7 @@ const W12MForm: React.FC = () => {
         />
         <W12MInput
           id="Planet-name"
-          label="Planet Name"
+          label="Planet Name : "
           type="text"
           value={planet}
           placeholder="Enter the planet name"
@@ -54,7 +54,7 @@ const W12MForm: React.FC = () => {
         />
         <W12MInput
           id="num-of-beings"
-          label="Number of Beings"
+          label="Number of Beings : "
           type="text"
           value={numOfBeings}
           placeholder="Enter the number of Beings"
@@ -62,7 +62,7 @@ const W12MForm: React.FC = () => {
         />
         <W12MSelect
           id="select"
-          label="What is 2 + 2 ?"
+          label="What is 2 + 2 ? "
           value={select}
           onChange={(e) => setSelect(e.target.value)}
         >
@@ -71,7 +71,7 @@ const W12MForm: React.FC = () => {
 
         <W12MTextBox
           id="reason"
-          label="Reason for sparing"
+          label="Reason for sparing : "
           value={text}
           placeholder="Enter the reason for sparing"
           rows={6}

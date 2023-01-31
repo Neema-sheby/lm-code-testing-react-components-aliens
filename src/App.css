@@ -18,14 +18,16 @@
   -o-border-radius: 0.3rem; }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Play", Arial, Helvetica, sans-serif;
   line-height: 1.5;
   font-size: 1.2rem;
   display: flex;
   justify-content: center; }
 
 .heading--1 {
-  font-size: 2rem; }
+  font-size: 2.2rem;
+  border-bottom: 0.01rem solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 2rem; }
 
 .btn--form {
   width: 12rem;

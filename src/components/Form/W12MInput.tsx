@@ -3,6 +3,7 @@ interface InputProp {
   label: string;
   type: string;
   value: string | number;
+  placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -11,13 +12,23 @@ const W12MInput: React.FC<InputProp> = ({
   label,
   type,
   value,
+  placeholder,
   onChange,
 }) => {
   return (
-    <>
-      <label htmlFor={id}>{label}</label>
-      <input type={type} id={id} value={value} onChange={onChange} />
-    </>
+    <div className="form__input-box">
+      <label htmlFor={id} className="form__label">
+        {label}
+      </label>
+      <input
+        className="form__input"
+        type={type}
+        id={id}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
+    </div>
   );
 };
 

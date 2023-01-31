@@ -4,6 +4,7 @@ interface TextBoxProp {
   id: string;
   label: string;
   value: string;
+  placeholder: string;
   rows: number;
   cols: number;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
@@ -13,6 +14,7 @@ const W12MTextBox: React.FC<TextBoxProp> = ({
   id,
   label,
   value,
+  placeholder,
   rows,
   cols,
   onChange,
@@ -22,12 +24,13 @@ const W12MTextBox: React.FC<TextBoxProp> = ({
       <label htmlFor={id}>{label}</label>
       <textarea
         id={id}
+        className="form__textArea"
         value={value}
+        placeholder={placeholder}
         rows={rows}
         cols={cols}
         onChange={onChange}
       ></textarea>
-      ;
     </>
   );
 };

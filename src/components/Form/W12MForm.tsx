@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import React, { useState } from "react";
 import W12MInput from "./W12MInput";
 import W12MSelect from "./W12MSelect";
 import W12MOption from "./W12MOption";
@@ -23,49 +23,48 @@ const W12MForm: React.FC = () => {
         select: select,
         text: text,
       };
+      console.log(data);
+      setSpecies("");
+      setPlanet("");
+      setnumOfBeings(0);
+      setSelect("");
+      setText("");
+      setClicked(false);
     }
   };
 
   return (
-    <section className="w12MForm">
-      <form onSubmit={(e) => onSubmitHandler(e)}>
+    <section className="section--form">
+      <form className="form" onSubmit={(e) => onSubmitHandler(e)}>
         <W12MInput
           id="Species-name"
           label="Species Name"
           type="text"
           value={species}
-          onChange={(e) => {
-            console.log(e.target.value);
-            setSpecies(e.target.value);
-          }}
+          placeholder="Enter the species name"
+          onChange={(e) => setSpecies(e.target.value)}
         />
         <W12MInput
           id="Planet-name"
           label="Planet Name"
           type="text"
           value={planet}
-          onChange={(e) => {
-            console.log(e.target.value);
-            setPlanet(e.target.value);
-          }}
+          placeholder="Enter the planet name"
+          onChange={(e) => setPlanet(e.target.value)}
         />
         <W12MInput
           id="num-of-beings"
           label="Number of Beings"
-          type="number"
+          type="text"
           value={numOfBeings}
-          onChange={(e) => {
-            console.log(e.target.value);
-            setnumOfBeings(+e.target.value);
-          }}
+          placeholder="Enter the number of Beings"
+          onChange={(e) => setnumOfBeings(+e.target.value)}
         />
         <W12MSelect
           id="select"
+          label="What is 2 + 2 ?"
           value={select}
-          onChange={(e) => {
-            console.log(e.target.value);
-            setSelect(e.target.value);
-          }}
+          onChange={(e) => setSelect(e.target.value)}
         >
           <W12MOption value="Not-4">Not 4</W12MOption>
         </W12MSelect>
@@ -74,14 +73,14 @@ const W12MForm: React.FC = () => {
           id="reason"
           label="Reason for sparing"
           value={text}
+          placeholder="Enter the reason for sparing"
           rows={6}
           cols={100}
-          onChange={(e) => {
-            console.log(e.target.value);
-            setText(e.target.value);
-          }}
+          onChange={(e) => setText(e.target.value)}
         ></W12MTextBox>
-        <W12MButton onClick={() => setClicked(true)}>Submit</W12MButton>
+        <W12MButton className="btn--form" onClick={() => setClicked(true)}>
+          Submit Form
+        </W12MButton>
       </form>
     </section>
   );

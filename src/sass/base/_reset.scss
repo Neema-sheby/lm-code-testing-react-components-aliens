@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#root {
+  width: 100%;
+  padding: 10rem;
+  background-image: url("./images/adrien-olichon-Svsc04xWIb0-unsplash.jpg");
+  @include respond(phone) {
+  }
+}
+
+.container {
+  &--form {
+    width: 100%;
+    box-shadow: $box-shadow--large;
+    border-radius: $border-radius;
+    -webkit-border-radius: $border-radius;
+    -moz-border-radius: $border-radius;
+    -ms-border-radius: $border-radius;
+    -o-border-radius: $border-radius;
+  }
+}

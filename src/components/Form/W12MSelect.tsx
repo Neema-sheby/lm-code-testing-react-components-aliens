@@ -2,6 +2,7 @@ import React from "react";
 
 interface SelectProp {
   id: string;
+  label: string;
   value: string;
   children: React.ReactNode;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -9,17 +10,25 @@ interface SelectProp {
 
 const W12MSelect: React.FC<SelectProp> = ({
   id,
+  label,
   value,
   onChange,
   children,
 }) => {
   return (
-    <>
-      <label htmlFor={id}></label>
-      <select id={id} value={value} onChange={onChange}>
+    <div className="form__input-box">
+      <label className="form__label" htmlFor={id}>
+        {label}
+      </label>
+      <select
+        className="form__select"
+        id={id}
+        value={value}
+        onChange={onChange}
+      >
         {children}
       </select>
-    </>
+    </div>
   );
 };
 

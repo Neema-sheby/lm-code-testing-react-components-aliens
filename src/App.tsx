@@ -4,7 +4,7 @@ import W12MForm from "./components/Form/W12MForm";
 
 function App() {
   return (
-    <div className="w12MForm">
+    <div className="container--form">
       <W12MHeader />
       <W12MForm />
     </div>

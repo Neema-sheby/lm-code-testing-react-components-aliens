@@ -1,5 +1,5 @@
 const W12MHeader = () => (
-  <div className="header">
+  <header className="header">
     <h1 className="heading--1">
       W-12-M :- APPLICATION TO SPARE PLANET FROM DESTRUCTION
     </h1>
@@ -10,7 +10,7 @@ const W12MHeader = () => (
         spared.
       </li>
     </ul>
-  </div>
+  </header>
 );
 
 export default W12MHeader;

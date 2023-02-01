@@ -16,7 +16,7 @@ const W12MInput: React.FC<InputProp> = ({
   onChange,
 }) => {
   return (
-    <div className="form__input-box">
+    <div role="listitem" className="form__input-box">
       <label htmlFor={id} className="form__label">
         {label}
       </label>

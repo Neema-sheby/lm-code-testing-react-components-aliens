@@ -6,7 +6,9 @@ function App() {
   return (
     <div className="container--form">
       <W12MHeader />
-      <W12MForm />
+      <section className="section--form">
+        <W12MForm />
+      </section>
     </div>
   );
 }

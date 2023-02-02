@@ -5,14 +5,15 @@
   gap: 2rem;
   font-size: 1.2rem;
 
-  &__input-box {
+  &__input-box,
+  &__select-box {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
   }
 
   &__label {
-    width: 15%;
+    width: 25%;
   }
 
   &__input,
@@ -28,7 +29,9 @@
     padding: 0.8rem;
 
     &::placeholder {
+      font-family: "Play", Arial, Helvetica, sans-serif;
       font-size: 1rem;
+      color: $color-grey;
     }
   }
 
@@ -39,8 +42,14 @@
   }
 
   &__textArea {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Play", Arial, Helvetica, sans-serif;
     width: 70%;
     height: 8rem;
+  }
+
+  &__select {
+    font-family: "Play", Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    color: $color-grey;
   }
 }

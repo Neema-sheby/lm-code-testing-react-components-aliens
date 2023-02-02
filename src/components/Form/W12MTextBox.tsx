@@ -1,6 +1,7 @@
 import React from "react";
 
 interface TextBoxProp {
+  ariaLabel: string;
   id: string;
   label: string;
   value: string;
@@ -11,6 +12,7 @@ interface TextBoxProp {
 }
 
 const W12MTextBox: React.FC<TextBoxProp> = ({
+  ariaLabel,
   id,
   label,
   value,
@@ -20,9 +22,12 @@ const W12MTextBox: React.FC<TextBoxProp> = ({
   onChange,
 }) => {
   return (
-    <>
-      <label htmlFor={id}>{label}</label>
+    <div role="tree" aria-label="inputBox" className="form__input-box">
+      <label className="form__label" htmlFor={id}>
+        {label}
+      </label>
       <textarea
+        aria-label={ariaLabel}
         id={id}
         className="form__textArea"
         value={value}
@@ -31,7 +36,7 @@ const W12MTextBox: React.FC<TextBoxProp> = ({
         cols={cols}
         onChange={onChange}
       ></textarea>
-    </>
+    </div>
   );
 };
 

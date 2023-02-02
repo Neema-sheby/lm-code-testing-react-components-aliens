@@ -31,6 +31,7 @@ body {
   padding-bottom: 2rem; }
 
 .btn--form {
+  font-family: "Play", Arial, Helvetica, sans-serif;
   width: 12rem;
   align-self: flex-end;
   font-size: 1.2rem;
@@ -66,12 +67,12 @@ body {
   flex-direction: column;
   gap: 2rem;
   font-size: 1.2rem; }
-  .form__input-box {
+  .form__input-box, .form__select-box {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem; }
   .form__label {
-    width: 15%; }
+    width: 25%; }
   .form__input, .form__select, .form__textArea {
     border-radius: 0.3rem;
     -webkit-border-radius: 0.3rem;
@@ -82,14 +83,20 @@ body {
     box-shadow: 0 0.1rem 0.3rem 0.005rem rgba(0, 0, 0, 0.2);
     padding: 0.8rem; }
     .form__input::placeholder, .form__select::placeholder, .form__textArea::placeholder {
-      font-size: 1rem; }
+      font-family: "Play", Arial, Helvetica, sans-serif;
+      font-size: 1rem;
+      color: #535c68; }
   .form__input, .form__select {
     width: 40%;
     height: 3rem; }
   .form__textArea {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Play", Arial, Helvetica, sans-serif;
     width: 70%;
     height: 8rem; }
+  .form__select {
+    font-family: "Play", Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    color: #535c68; }
 
 .section--form {
   background-color: #fff;

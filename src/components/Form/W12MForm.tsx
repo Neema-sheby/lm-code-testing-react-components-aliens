@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import W12MInput from "./W12MInput";
-import W12MSelect from "./W12MSelect";
-import W12MOption from "./W12MOption";
-import W12MTextBox from "./W12MTextBox";
+import W12MInput from "./Input/W12MInput";
+import W12MSelect from "./Select/W12MSelect";
+import W12MOption from "./Select/W12MOption";
+import { OPTIONS } from "./Select/Options";
+import W12MTextBox from "./TextArea/W12MTextBox";
 import W12MButton from "../Button/W12MButton";
 import { Data } from "../Interface";
 
@@ -28,11 +29,11 @@ const W12MForm: React.FC<FormProp> = ({ setData }) => {
       text: text,
     };
     setData(data);
-    // setSpecies("");
-    // setPlanet("");
-    // setnumOfBeings("");
-    // setSelect("");
-    // setText("");
+    setSpecies("");
+    setPlanet("");
+    setnumOfBeings("");
+    setSelect("Choose the correct answer");
+    setText("");
   };
 
   return (
@@ -65,17 +66,24 @@ const W12MForm: React.FC<FormProp> = ({ setData }) => {
         placeholder="Enter the number of Beings"
         onChange={(e) => setnumOfBeings(e.target.value)}
       />
+
       <W12MSelect
         ariaLabel="select-what"
+        value={select}
         id="select-what"
         label="What is 2 + 2 ?"
         onChange={(e) => {
           setSelect(e.target.value);
         }}
       >
-        <W12MOption value="">Choose the correct answer</W12MOption>
-        <W12MOption value="4">4</W12MOption>
-        <W12MOption value="Not 4">Not 4</W12MOption>
+        {OPTIONS.map((option, i) => {
+          return (
+            <W12MOption key={i + option.value} value={option.value}>
+              {option.label}
+            </W12MOption>
+          );
+        })}
+        .join('')
       </W12MSelect>
 
       <W12MTextBox

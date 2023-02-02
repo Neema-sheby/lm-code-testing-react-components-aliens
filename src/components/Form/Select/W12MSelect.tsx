@@ -2,6 +2,7 @@ import React from "react";
 
 interface SelectProp {
   ariaLabel: string;
+  value: string;
   id: string;
   label: string;
   children: React.ReactNode;
@@ -10,6 +11,7 @@ interface SelectProp {
 
 const W12MSelect: React.FC<SelectProp> = ({
   ariaLabel,
+  value,
   id,
   label,
   onChange,
@@ -22,6 +24,7 @@ const W12MSelect: React.FC<SelectProp> = ({
       </label>
       <select
         aria-label={ariaLabel}
+        value={value}
         className="form__select"
         id={id}
         onChange={onChange}

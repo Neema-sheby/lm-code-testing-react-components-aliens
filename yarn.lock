@@ -1777,7 +1777,7 @@
     "@svgr/plugin-svgo" "^5.5.0"
     "loader-utils" "^2.0.0"
 
-"@testing-library/dom@^8.20.0", "@testing-library/dom@^8.5.0", "@testing-library/dom@>=7", "@testing-library/dom@>=7.21.4":
+"@testing-library/dom@^8.20.0", "@testing-library/dom@^8.5.0", "@testing-library/dom@>=7.21.4":
   "integrity" "sha512-d9ULIT+a4EXLX3UU8FBjauG9NnsZHkHztXoIcTsOKoOw030fyjheN9svkTULjJxtYag9DZz5Jz5qkWZDPxTFwA=="
   "resolved" "https://registry.npmjs.org/@testing-library/dom/-/dom-8.20.0.tgz"
   "version" "8.20.0"
@@ -8360,13 +8360,6 @@
     "workbox-webpack-plugin" "^6.4.1"
   optionalDependencies:
     "fsevents" "^2.3.2"
-
-"react-select-event@^5.5.1":
-  "integrity" "sha512-goAx28y0+iYrbqZA2FeRTreHHs/ZtSuKxtA+J5jpKT5RHPCbVZJ4MqACfPnWyFXsEec+3dP5bCrNTxIX8oYe9A=="
-  "resolved" "https://registry.npmjs.org/react-select-event/-/react-select-event-5.5.1.tgz"
-  "version" "5.5.1"
-  dependencies:
-    "@testing-library/dom" ">=7"
 
 "react@^18.0.0", "react@^18.2.0", "react@>= 16":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="

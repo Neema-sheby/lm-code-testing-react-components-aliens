@@ -8,7 +8,7 @@ const data = {
   species: "Chewbacca",
   planet: "Narkina",
   numOfBeings: "3",
-  select: "Not 4",
+  select: "not-4",
   text: " You were good!",
 };
 
@@ -82,7 +82,64 @@ it("calls a function setData() on submit", async () => {
     species: "Chewbacca",
     planet: "Narkina",
     numOfBeings: "3",
-    select: "Not 4",
+    select: "not-4",
     text: " You were good!",
   });
+});
+
+///-----Test 3 -----/////////////////////////////////////////////////////////////
+
+it("empties the input fields and select fields after form submit", async () => {
+  const user = userEvent.setup();
+
+  render(<W12MForm setData={() => {}} />);
+
+  const inputFieldSpecies = screen.getByRole("textbox", {
+    name: /species-name/i,
+  });
+  const inputFieldPlanet = screen.getByRole("textbox", {
+    name: /planet-name/i,
+  });
+  const inputFieldNumOfBeings = screen.getByRole("textbox", {
+    name: /num-of-beings/i,
+  });
+
+  const selectField = screen.getByRole("combobox", {
+    name: /select-what/i,
+  });
+
+  const textField = screen.getByRole("textbox", {
+    name: /textArea-reason/i,
+  });
+
+  const button = screen.getByRole("button", { name: /Submit form/i });
+
+  //simulate click and enter the name of species
+  await user.click(inputFieldSpecies);
+  await user.type(inputFieldSpecies, data.species);
+
+  //simulate click and enter the name of planet
+  await user.click(inputFieldPlanet);
+  await user.type(inputFieldPlanet, data.planet);
+
+  //simulate click and enter the nunber of beings
+  await user.click(inputFieldNumOfBeings);
+  await user.type(inputFieldNumOfBeings, data.numOfBeings);
+
+  //simulate click and select the option
+  await user.click(selectField);
+  await user.selectOptions(selectField, data.select);
+
+  //simulate click and enter the reason
+  await user.click(textField);
+  await user.type(textField, data.text);
+
+  //simulate button click
+  await user.click(button);
+
+  expect(inputFieldSpecies).toHaveValue("");
+  expect(inputFieldPlanet).toHaveValue("");
+  expect(inputFieldNumOfBeings).toHaveValue("");
+  expect(selectField).toHaveValue("");
+  expect(textField).toHaveValue("");
 });

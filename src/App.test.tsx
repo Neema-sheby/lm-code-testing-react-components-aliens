@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 
-test("Displays a header and a form", () => {
+it("Displays a header and a form", () => {
   render(<App />);
 
   const header = screen.getByRole("banner");

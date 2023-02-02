@@ -14,6 +14,13 @@ const data = {
 
 ///-----Test 1 -----/////////////////////////////////////////////////////////////
 
+it("renders form element", () => {
+  const { container } = render(<W12MForm setData={() => {}} />);
+  expect(container.firstChild).toHaveClass("form");
+});
+
+///-----Test 2 -----/////////////////////////////////////////////////////////////
+
 it("Renders five fields and a button in the form", () => {
   render(<W12MForm setData={() => {}} />);
 
@@ -25,7 +32,7 @@ it("Renders five fields and a button in the form", () => {
   expect(button).toBeInTheDocument();
 });
 
-///-----Test 2 -----/////////////////////////////////////////////////////////////
+///-----Test 3 -----/////////////////////////////////////////////////////////////
 
 it("calls a function setData() on submit", async () => {
   const user = userEvent.setup();
@@ -87,7 +94,7 @@ it("calls a function setData() on submit", async () => {
   });
 });
 
-///-----Test 3 -----/////////////////////////////////////////////////////////////
+///-----Test 4 -----/////////////////////////////////////////////////////////////
 
 it("empties the input fields and select fields after form submit", async () => {
   const user = userEvent.setup();

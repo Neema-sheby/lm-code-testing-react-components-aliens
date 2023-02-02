@@ -38,18 +38,18 @@ If you've run the project already using `npm/yarn start` you'll have seen there'
 
 Let's see if they've left us any tests.
 
--   Run `npm test` and look at the output
+- Run `npm test` and look at the output
 
-![Sample Test Output](../public/sample-test-output.jpg)
+![Sample Test Output](../public/sample-test-ou tput.jpg)
 
 Phew. These aliens might be about to destroy the Earth, but at least they've written tests for all their React components, so they're not _totally_ horrible!
 
--   Look through the following files: `App.test.tsx`, `W12MForm.test.tsx` and `W12MHeader.test.tsx`
+- Look through the following files: `App.test.tsx`, `W12MForm.test.tsx` and `W12MHeader.test.tsx`
 
 Inspecting the files we can see the aliens have used some techniques you're familiar with, such as `getByText` and `expect(x).toBeInTheDocument()`.
 
 But they've also used another way of inspecting the virtual DOM! `W12MForm.test.tsx` gets the `firstChild` of the `container` element that we get back from our test renderer. It seems you can use normal DOM manipulation methods even in your tests - very cool!
 
--   Make sure you understand all of the supplied tests and that all three are passing on your machine before you move on.
+- Make sure you understand all of the supplied tests and that all three are passing on your machine before you move on.
 
 When you're ready, move on to [Activity 2](./activity_2.md)!

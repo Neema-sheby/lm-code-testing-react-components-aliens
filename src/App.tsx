@@ -23,7 +23,6 @@ function App() {
       <W12MHeader />
       <section className="section--form">
         <W12MForm setData={dataHandler} />
-        <div>{data.species}</div>
       </section>
     </div>
   );

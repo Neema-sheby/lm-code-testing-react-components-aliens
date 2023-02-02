@@ -8,7 +8,7 @@ const data = {
   species: "Chewbacca",
   planet: "Narkina",
   numOfBeings: "3",
-  select: "not-4",
+  select: "Not 4",
   text: " You were good!",
 };
 
@@ -85,13 +85,7 @@ it("calls a function setData() on submit", async () => {
 
   // check if form make a function call setData() onsubmit
   expect(mock).toHaveBeenCalled();
-  expect(mock).toHaveBeenCalledWith({
-    species: "Chewbacca",
-    planet: "Narkina",
-    numOfBeings: "3",
-    select: "not-4",
-    text: " You were good!",
-  });
+  expect(mock).toHaveBeenCalledWith(data);
 });
 
 ///-----Test 4 -----/////////////////////////////////////////////////////////////

@@ -19,12 +19,22 @@ const W12MForm: React.FC<FormProp> = ({ setData }) => {
     select: "",
     text: "",
   });
+  const [displayData, setDisplayData] = useState<Data>({
+    species: "",
+    planet: "",
+    numOfBeings: "",
+    select: "",
+    text: "",
+  });
   const [clicked, setClicked] = useState<boolean>(false);
 
   const onSubmitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
     setClicked(true);
+
+    setDisplayData(formData);
     setData(formData);
+
     setFormData({
       species: "",
       planet: "",
@@ -99,6 +109,15 @@ const W12MForm: React.FC<FormProp> = ({ setData }) => {
         ></W12MTextBox>
         <W12MButton className="btn--form">Submit Form</W12MButton>
       </form>
+      {clicked ? (
+        <div>
+          <h6>{displayData.species}</h6>
+          <h6>{displayData.planet}</h6>
+          <h6>{displayData.numOfBeings}</h6>
+          <h6>{displayData.select}</h6>
+          <h6>{displayData.text}</h6>
+        </div>
+      ) : null}
     </>
   );
 };

@@ -3,10 +3,14 @@ import W12MHeader from "./W12MHeader";
 
 ///-----Test 1 -----/////////////////////////////////////////////////////////////
 
-it("renders the main heading", () => {
+it("renders main heading (h1 element)", () => {
   render(<W12MHeader />);
 
-  // const heading = screen.getByRole();
+  const heading = screen.getByRole("heading");
+
+  expect(heading).toHaveTextContent(
+    /W-12-M :- APPLICATION TO SPARE PLANET FROM DESTRUCTION/i
+  );
 });
 
 ///-----Test 2 -----/////////////////////////////////////////////////////////////

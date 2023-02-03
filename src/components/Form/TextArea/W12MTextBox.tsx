@@ -4,10 +4,12 @@ interface TextBoxProp {
   ariaLabel: string;
   id: string;
   label: string;
-  value: string;
+  value: string | number;
   placeholder: string;
   rows: number;
   cols: number;
+  minLength: number;
+  maxLength: number;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
@@ -19,6 +21,8 @@ const W12MTextBox: React.FC<TextBoxProp> = ({
   placeholder,
   rows,
   cols,
+  minLength,
+  maxLength,
   onChange,
 }) => {
   return (
@@ -34,6 +38,8 @@ const W12MTextBox: React.FC<TextBoxProp> = ({
         placeholder={placeholder}
         rows={rows}
         cols={cols}
+        minLength={minLength}
+        maxLength={maxLength}
         onChange={onChange}
       ></textarea>
     </div>

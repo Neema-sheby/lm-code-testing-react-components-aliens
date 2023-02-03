@@ -1,15 +1,24 @@
 import React, { useState } from "react";
 import W12MInput from "./Input/W12MInput";
 import W12MSelect from "./Select/W12MSelect";
-import W12MOption from "./Select/W12MOption";
-import { OPTIONS } from "./Select/Options";
+import W12MOption from "./Options/W12MOption";
+import { OPTIONS } from "./Options/OptionsData";
 import W12MTextBox from "./TextArea/W12MTextBox";
 import W12MButton from "../Button/W12MButton";
-import { Data } from "../Interface";
+import { FormProp, Data } from "../Interface";
 
-interface FormProp {
-  onSubmit: (data: Data) => void;
-}
+import {
+  MIN_CHAR_SPECIES,
+  MAX_CHAR_SPECIES,
+  MIN_CHAR_PLANET,
+  MAX_CHAR_PLANET,
+  MIN_CHAR_OF_BEINGS,
+  MAX_CHAR_OF_BEINGS,
+  MIN_CHAR_TEXTAREA,
+  MAX_CHAR_TEXTAREA,
+  TEXTAREA_ROW_NUM,
+  TEXTAREA_COL_NUM,
+} from "../Configuration";
 
 const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
   const [formData, setFormData] = useState<Data>({
@@ -54,6 +63,8 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
           type="text"
           value={formData.species}
           placeholder="Enter the species name"
+          minLength={MIN_CHAR_SPECIES}
+          maxLength={MAX_CHAR_SPECIES}
           onChange={(e) =>
             setFormData({ ...formData, species: e.target.value })
           }
@@ -66,6 +77,8 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
           type="text"
           value={formData.planet}
           placeholder="Enter the planet name"
+          minLength={MIN_CHAR_PLANET}
+          maxLength={MAX_CHAR_PLANET}
           onChange={(e) => setFormData({ ...formData, planet: e.target.value })}
         />
         <W12MInput
@@ -75,6 +88,8 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
           type="text"
           value={formData.numOfBeings}
           placeholder="Enter the number of Beings"
+          minLength={MIN_CHAR_OF_BEINGS}
+          maxLength={MAX_CHAR_OF_BEINGS}
           onChange={(e) =>
             setFormData({ ...formData, numOfBeings: e.target.value })
           }
@@ -94,7 +109,6 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
               </W12MOption>
             );
           })}
-          .join('')
         </W12MSelect>
 
         <W12MTextBox
@@ -103,8 +117,10 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
           label="Reason for sparing"
           value={formData.text}
           placeholder="Enter the reason for sparing"
-          rows={6}
-          cols={100}
+          rows={TEXTAREA_ROW_NUM}
+          cols={TEXTAREA_COL_NUM}
+          minLength={MIN_CHAR_TEXTAREA}
+          maxLength={MAX_CHAR_TEXTAREA}
           onChange={(e) => setFormData({ ...formData, text: e.target.value })}
         ></W12MTextBox>
         <W12MButton className="btn--form">Submit Form</W12MButton>

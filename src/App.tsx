@@ -22,7 +22,7 @@ function App() {
     <div className="container--form">
       <W12MHeader />
       <section className="section--form">
-        <W12MForm setData={dataHandler} />
+        <W12MForm onSubmit={dataHandler} />
       </section>
     </div>
   );

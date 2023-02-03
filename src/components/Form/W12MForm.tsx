@@ -8,10 +8,10 @@ import W12MButton from "../Button/W12MButton";
 import { Data } from "../Interface";
 
 interface FormProp {
-  setData: (data: Data) => void;
+  onSubmit: (data: Data) => void;
 }
 
-const W12MForm: React.FC<FormProp> = ({ setData }) => {
+const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
   const [formData, setFormData] = useState<Data>({
     species: "",
     planet: "",
@@ -33,7 +33,7 @@ const W12MForm: React.FC<FormProp> = ({ setData }) => {
     setClicked(true);
 
     setDisplayData(formData);
-    setData(formData);
+    onSubmit(formData);
 
     setFormData({
       species: "",
@@ -110,13 +110,13 @@ const W12MForm: React.FC<FormProp> = ({ setData }) => {
         <W12MButton className="btn--form">Submit Form</W12MButton>
       </form>
       {clicked ? (
-        <div>
-          <h6>{displayData.species}</h6>
-          <h6>{displayData.planet}</h6>
-          <h6>{displayData.numOfBeings}</h6>
-          <h6>{displayData.select}</h6>
-          <h6>{displayData.text}</h6>
-        </div>
+        <ul>
+          <li>{displayData.species}</li>
+          <li>{displayData.planet}</li>
+          <li>{displayData.numOfBeings}</li>
+          <li>{displayData.select}</li>
+          <li>{displayData.text}</li>
+        </ul>
       ) : null}
     </>
   );

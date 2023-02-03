@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 //import user from "@testing-library/user-event";
 //import { fireEvent } from "@testing-library/react";
@@ -10,7 +10,7 @@ const data: Data = {
   planet: "Narkina",
   numOfBeings: "3",
   select: "Not 4",
-  text: " You were good!",
+  text: "You were good!",
 };
 
 ///-----Test 1 -----/////////////////////////////////////////////////////////////
@@ -23,7 +23,7 @@ it("renders form element", () => {
 ///-----Test 2 -----/////////////////////////////////////////////////////////////
 
 it("Renders five fields and a button in the form", () => {
-  render(<W12MForm setData={() => {}} />);
+  render(<W12MForm onSubmit={() => {}} />);
 
   const formFields = screen.getAllByRole("tree");
 
@@ -35,11 +35,11 @@ it("Renders five fields and a button in the form", () => {
 
 ///-----Test 3 -----/////////////////////////////////////////////////////////////
 
-it("calls a function setData() on submit", async () => {
+it("submit button call its handler function and passes the correct parameters", async () => {
   const user = userEvent.setup();
   const mock = jest.fn();
 
-  render(<W12MForm setData={mock} />);
+  render(<W12MForm onSubmit={mock} />);
 
   const inputFieldSpecies = screen.getByRole("textbox", {
     name: /species-name/i,
@@ -84,9 +84,22 @@ it("calls a function setData() on submit", async () => {
   //simulate button click
   await user.click(button);
 
-  // check if form make a function call setData() onsubmit
+  //render the form data in the browser
+  const displayDataBox = screen.getByRole("list");
+
+  const formData = within(displayDataBox).getAllByRole("listitem");
+
+  // checks if submit button call its handler function
   expect(mock).toHaveBeenCalled();
+  expect(mock).toHaveBeenCalledTimes(1);
   expect(mock).toHaveBeenCalledWith(data);
+
+  //checks if submit button passes the correct parameters
+  expect(formData[0]).toHaveTextContent(data["species"]);
+  expect(formData[1]).toHaveTextContent(data["planet"]);
+  expect(formData[2]).toHaveTextContent(data["numOfBeings"]);
+  expect(formData[3]).toHaveTextContent(data["select"]);
+  expect(formData[4]).toHaveTextContent(data["text"]);
 });
 
 ///-----Test 4 -----/////////////////////////////////////////////////////////////
@@ -94,7 +107,7 @@ it("calls a function setData() on submit", async () => {
 it("empties the input fields and select fields after form submit", async () => {
   const user = userEvent.setup();
 
-  render(<W12MForm setData={() => {}} />);
+  render(<W12MForm onSubmit={() => {}} />);
 
   const inputFieldSpecies = screen.getByRole("textbox", {
     name: /species-name/i,

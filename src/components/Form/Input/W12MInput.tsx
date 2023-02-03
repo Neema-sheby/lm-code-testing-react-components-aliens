@@ -5,6 +5,8 @@ interface InputProp {
   type: string;
   value: string | number;
   placeholder: string;
+  minLength: number;
+  maxLength: number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -15,6 +17,8 @@ const W12MInput: React.FC<InputProp> = ({
   type,
   value,
   placeholder,
+  minLength,
+  maxLength,
   onChange,
 }) => {
   return (
@@ -30,6 +34,8 @@ const W12MInput: React.FC<InputProp> = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        minLength={minLength}
+        maxLength={maxLength}
       />
     </div>
   );

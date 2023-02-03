@@ -1,7 +1,4 @@
-interface OptionProp {
-  value: string;
-  children: React.ReactNode;
-}
+import { OptionProp } from "../../Interface";
 
 const W12MOption: React.FC<OptionProp> = ({ value, children }) => {
   return <option value={value}>{children}</option>;

@@ -1,10 +1,11 @@
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import W12MInput from "./W12MInput";
+import { MIN_CHAR_SPECIES, MAX_CHAR_SPECIES } from "../../Configuration";
 
 ///-----Test 1 -----/////////////////////////////////////////////////////////////
 
-it("renders the input element", () => {
+it("renders the input element based on the props entered", () => {
   render(
     <W12MInput
       id="Species-name"
@@ -13,6 +14,8 @@ it("renders the input element", () => {
       value="Chewbacca"
       type="text"
       placeholder="Enter the species"
+      minLength={MIN_CHAR_SPECIES}
+      maxLength={MAX_CHAR_SPECIES}
       onChange={() => {}}
     />
   );
@@ -35,6 +38,8 @@ it("calls it's onChange function", async () => {
       value="Chewbacca"
       type="text"
       placeholder="Enter the species"
+      minLength={MIN_CHAR_SPECIES}
+      maxLength={MAX_CHAR_SPECIES}
       onChange={mock}
     />
   );
@@ -42,6 +47,7 @@ it("calls it's onChange function", async () => {
   const user = userEvent.setup();
   const input = screen.getByRole("textbox", { name: /species-name/i });
 
+  //simulate click and enter the input
   await user.click(input);
   await user.type(input, "Chewbacca");
 
@@ -51,7 +57,7 @@ it("calls it's onChange function", async () => {
 
 ///-----Test 3 -----/////////////////////////////////////////////////////////////
 
-it("displays the value passed through props", async () => {
+it("displays the value passed through props", () => {
   render(
     <W12MInput
       id="Species-name"
@@ -60,6 +66,8 @@ it("displays the value passed through props", async () => {
       value="Chewbacca"
       type="text"
       placeholder="Enter the species"
+      minLength={MIN_CHAR_SPECIES}
+      maxLength={MAX_CHAR_SPECIES}
       onChange={() => {}}
     />
   );

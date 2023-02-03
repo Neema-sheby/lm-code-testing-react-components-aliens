@@ -16,7 +16,7 @@ const data: Data = {
 ///-----Test 1 -----/////////////////////////////////////////////////////////////
 
 it("renders form element", () => {
-  const { container } = render(<W12MForm setData={() => {}} />);
+  const { container } = render(<W12MForm onSubmit={() => {}} />);
   expect(container.firstChild).toHaveClass("form");
 });
 

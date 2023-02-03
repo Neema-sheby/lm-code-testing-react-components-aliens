@@ -22,7 +22,7 @@ const W12MTextBox: React.FC<TextBoxProp> = ({
   onChange,
 }) => {
   return (
-    <div role="tree" aria-label="inputBox" className="form__input-box">
+    <div role="textbox" aria-label="inputBox" className="form__input-box">
       <label className="form__label" htmlFor={id}>
         {label}
       </label>

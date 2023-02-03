@@ -16,8 +16,10 @@ const data: Data = {
 ///-----Test 1 -----/////////////////////////////////////////////////////////////
 
 it("renders form element", () => {
-  const { container } = render(<W12MForm onSubmit={() => {}} />);
-  expect(container.firstChild).toHaveClass("form");
+  render(<W12MForm onSubmit={() => {}} />);
+
+  const form = screen.getByRole("form", { name: "W12form-1" });
+  expect(form).toHaveClass("form");
 });
 
 ///-----Test 2 -----/////////////////////////////////////////////////////////////
@@ -25,7 +27,7 @@ it("renders form element", () => {
 it("Renders five fields and a button in the form", () => {
   render(<W12MForm onSubmit={() => {}} />);
 
-  const formFields = screen.getAllByRole("tree");
+  const formFields = screen.getAllByRole("textbox", { name: "inputBox" });
 
   const button = screen.getByRole("button", { name: /Submit form/i });
 

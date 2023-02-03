@@ -18,7 +18,7 @@ const W12MInput: React.FC<InputProp> = ({
   onChange,
 }) => {
   return (
-    <div role="tree" aria-label="inputBox" className="form__input-box">
+    <div role="textbox" aria-label="inputBox" className="form__input-box">
       <label htmlFor={id} className="form__label">
         {label}
       </label>

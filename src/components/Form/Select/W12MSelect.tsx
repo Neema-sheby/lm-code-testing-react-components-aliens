@@ -18,7 +18,7 @@ const W12MSelect: React.FC<SelectProp> = ({
   children,
 }) => {
   return (
-    <div role="tree" ria-label="inputBox" className="form__select-box">
+    <div role="textbox" aria-label="inputBox" className="form__select-box">
       <label className="form__label" htmlFor={id}>
         {label}
       </label>

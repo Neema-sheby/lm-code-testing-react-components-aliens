@@ -3,8 +3,9 @@ import userEvent from "@testing-library/user-event";
 //import user from "@testing-library/user-event";
 //import { fireEvent } from "@testing-library/react";
 import W12MForm from "./W12MForm";
+import { Data } from "../Interface";
 
-const data = {
+const data: Data = {
   species: "Chewbacca",
   planet: "Narkina",
   numOfBeings: "3",

@@ -5,7 +5,7 @@ import W12MOption from "./Options/W12MOption";
 import { OPTIONS } from "./Options/OptionsData";
 import W12MTextBox from "./TextArea/W12MTextArea";
 import W12MButton from "../Button/W12MButton";
-import { Data } from "../dataInterface";
+import { Data } from "./FormDataInterface";
 import {
   isString,
   checkNumCharacters,
@@ -24,6 +24,14 @@ import {
   TEXTAREA_ROW_NUM,
   TEXTAREA_COL_NUM,
 } from "../Configuration";
+
+import {
+  errMsgSpecies,
+  errMsgPlanet,
+  errMsgNumOfBeings,
+  errMsgSelect,
+  errMsgTextArea,
+} from "../ErrorHandling/ErrorMessage";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -55,11 +63,47 @@ const initialErrorLog: ErrorLog = {
   errorTextArea: "",
 };
 
+// const throwErrorMessage: object = {
+//   species: {
+//     errEmpty: "Error: Field is empty ! Please enter a valid species name !",
+//     errCharCount: "Error: Species name must be between 3 and 23 characters !",
+//     errValidString: "Error: Please enter a valid string for species name",
+//   },
+//   planet: {
+//     errEmpty: "Error: Field is empty ! Please enter a valid planet name !",
+//     errCharCount: "Error: Planet name must be between 2 and 49 characters !",
+//     errValidString: "Error: Please enter a valid string for planet name !",
+//   },
+//   numOfBeings: {
+//     errEmpty: "Error: Field is empty ! Please enter a valid Number of beings !",
+//     errNumBeings: "Error: Number of beings must be at least 1,000,000,000 !",
+//     errValidNumber: "Error: Please enter a valid number of beings !",
+//   },
+//   select: {
+//     errNotSelected:
+//       "Error: Not selected ! Please select an answer from the option !",
+//     errInvalidAnswer: "Error: You selected the wrong answer! You failed !",
+//   },
+//   textArea: {
+//     errEmpty:
+//       "Error: Field is empty ! Please enter a valid reason for sparing !",
+//     errCharCount:
+//       "Error: Reason for sparing must be between 17 and 153 characters !",
+//   },
+// };
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
   const [formData, setFormData] = useState<Data>(initialDataValue);
   const [displayData, setDisplayData] = useState<Data>(initialDataValue);
   const [errorLog, setErrorLog] = useState<ErrorLog>(initialErrorLog);
   const [disabled, setDisabled] = useState<boolean>(false);
+
+  const ErrorHandling = (error: ErrorLog): void => {
+    setDisabled(true);
+    setErrorLog(error);
+  };
 
   const onSubmitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -67,73 +111,110 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
     setDisabled(false);
 
     if (!formData.species) {
-      setDisabled(true);
-      setErrorLog({
+      ErrorHandling({
         ...errorLog,
-        errorSpecies:
-          "Error: Field is empty ! Please enter a valid species name !",
+        errorSpecies: errMsgSpecies.errEmpty,
       });
+
+      // setDisabled(true);
+      // setErrorLog({
+      //   ...errorLog,
+      //   errorSpecies:
+      //     "Error: Field is empty ! Please enter a valid species name !",
+      // });
     } else if (
       !checkNumCharacters(MIN_CHAR_SPECIES, MAX_CHAR_SPECIES, formData.species)
     ) {
-      setDisabled(true);
-      setErrorLog({
+      ErrorHandling({
         ...errorLog,
-        errorSpecies:
-          "Error: Species name must be between 3 and 23 characters !",
+        errorSpecies: errMsgSpecies.errCharCount,
       });
+      // setDisabled(true);
+      // setErrorLog({
+      //   ...errorLog,
+      //   errorSpecies:
+      //     "Error: Species name must be between 3 and 23 characters !",
+      // });
     } else if (!formData.planet) {
-      setDisabled(true);
-      setErrorLog({
+      ErrorHandling({
         ...errorLog,
-        errorPlanet:
-          "Error: Field is empty ! Please enter a valid planet name !",
+        errorSpecies: errMsgPlanet.errEmpty,
       });
+      // setDisabled(true);
+      // setErrorLog({
+      //   ...errorLog,
+      //   errorPlanet:
+      //     "Error: Field is empty ! Please enter a valid planet name !",
+      // });
     } else if (
       !checkNumCharacters(MIN_CHAR_PLANET, MAX_CHAR_PLANET, formData.planet)
     ) {
-      setDisabled(true);
-      setErrorLog({
+      ErrorHandling({
         ...errorLog,
-        errorPlanet: "Error: Planet name must be between 2 and 49 characters !",
+        errorSpecies: errMsgPlanet.errCharCount,
       });
+      //setDisabled(true);
+      // setErrorLog({
+      //   ...errorLog,
+      //   errorPlanet: "Error: Planet name must be between 2 and 49 characters !",
+      // });
     } else if (!formData.numOfBeings) {
-      setDisabled(true);
-      setErrorLog({
+      ErrorHandling({
         ...errorLog,
-        errorNumOfBeings:
-          "Error: Field is empty ! Please enter a valid Number of beings !",
+        errorNumOfBeings: errMsgNumOfBeings.errValidNumber,
       });
+      //setDisabled(true);
+      // setErrorLog({
+      //   ...errorLog,
+      //   errorNumOfBeings:
+      //     "Error: Field is empty ! Please enter a valid Number of beings !",
+      // });
     } else if (+formData.numOfBeings <= MIN_NUM_OF_BEINGS) {
-      setDisabled(true);
-      setErrorLog({
+      ErrorHandling({
         ...errorLog,
-        errorNumOfBeings:
-          "Error: Number of beings must be at least 1,000,000,000 !",
+        errorNumOfBeings: errMsgNumOfBeings.errNum,
       });
+      //setDisabled(true);
+      // setErrorLog({
+      //   ...errorLog,
+      //   errorNumOfBeings:
+      //     "Error: Number of beings must be at least 1,000,000,000 !",
+      // });
     } else if (!formData.select) {
-      setDisabled(true);
-      setErrorLog({
+      ErrorHandling({
         ...errorLog,
-        errorSelect:
-          "Error: Please select the correct answer from the option !",
+        errorSelect: errMsgSelect.errNotSelected,
       });
+      //setDisabled(true);
+      // setErrorLog({
+      //   ...errorLog,
+      //   errorSelect:
+      //     "Error: Please select the correct answer from the option !",
+      // });
     } else if (!formData.text) {
-      setDisabled(true);
-      setErrorLog({
+      ErrorHandling({
         ...errorLog,
-        errorTextArea:
-          "Error: Field is empty ! Please enter a valid reason for sparing !",
+        errorTextArea: errMsgTextArea.errEmpty,
       });
+      //setDisabled(true);
+      // setErrorLog({
+      //   ...errorLog,
+      //   errorTextArea:
+      //     "Error: Field is empty ! Please enter a valid reason for sparing !",
+      // });
     } else if (
       !checkNumCharacters(MIN_CHAR_TEXTAREA, MAX_CHAR_TEXTAREA, formData.text)
     ) {
-      setDisabled(true);
-      setErrorLog({
+      ErrorHandling({
         ...errorLog,
-        errorTextArea:
-          "Error: Reason for sparing must be between 17 and 153 characters !",
+        errorTextArea: errMsgTextArea.errCharCount,
       });
+      // setDisabled(true);
+      // setErrorLog({
+      //   ...errorLog,
+      //   errorTextArea:
+      //     "Error: Reason for sparing must be between 17 and 153 characters !",
+      // });
     } else {
       setDisabled(false);
       setErrorLog(initialErrorLog);
@@ -160,8 +241,7 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
               ? setFormData({ ...formData, species: e.target.value })
               : setErrorLog({
                   ...errorLog,
-                  errorSpecies:
-                    "Error: Please enter a valid string for species name",
+                  errorSpecies: errMsgSpecies.errValidString,
                 });
           }}
           errorMessage={errorLog.errorSpecies}
@@ -181,8 +261,7 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
               ? setFormData({ ...formData, planet: e.target.value })
               : setErrorLog({
                   ...errorLog,
-                  errorPlanet:
-                    "Error: Please enter a valid string for planet name !",
+                  errorPlanet: errMsgPlanet.errValidString,
                 });
           }}
           errorMessage={errorLog.errorPlanet}
@@ -202,8 +281,7 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
               ? setFormData({ ...formData, numOfBeings: e.target.value })
               : setErrorLog({
                   ...errorLog,
-                  errorNumOfBeings:
-                    "Error: Please enter a valid number of beings !",
+                  errorNumOfBeings: errMsgNumOfBeings.errValidNumber,
                 });
           }}
           errorMessage={errorLog.errorNumOfBeings}
@@ -220,8 +298,7 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
             e.target.value === "Not 4"
               ? setErrorLog({
                   ...errorLog,
-                  errorSelect:
-                    "Error: You selected the wrong answer! You failed !",
+                  errorSelect: errMsgSelect.errInvalidAnswer,
                 })
               : setFormData({ ...formData, select: e.target.value });
           }}

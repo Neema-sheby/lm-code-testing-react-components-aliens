@@ -5,7 +5,7 @@ import W12MOption from "./Options/W12MOption";
 import { OPTIONS } from "./Options/OptionsData";
 import W12MTextBox from "./TextArea/W12MTextArea";
 import W12MButton from "../Button/W12MButton";
-import { Data } from "./FormDataInterface";
+import { Data } from "./W12MFormDataInterface";
 import {
   isString,
   checkNumCharacters,
@@ -63,35 +63,6 @@ const initialErrorLog: ErrorLog = {
   errorTextArea: "",
 };
 
-// const throwErrorMessage: object = {
-//   species: {
-//     errEmpty: "Error: Field is empty ! Please enter a valid species name !",
-//     errCharCount: "Error: Species name must be between 3 and 23 characters !",
-//     errValidString: "Error: Please enter a valid string for species name",
-//   },
-//   planet: {
-//     errEmpty: "Error: Field is empty ! Please enter a valid planet name !",
-//     errCharCount: "Error: Planet name must be between 2 and 49 characters !",
-//     errValidString: "Error: Please enter a valid string for planet name !",
-//   },
-//   numOfBeings: {
-//     errEmpty: "Error: Field is empty ! Please enter a valid Number of beings !",
-//     errNumBeings: "Error: Number of beings must be at least 1,000,000,000 !",
-//     errValidNumber: "Error: Please enter a valid number of beings !",
-//   },
-//   select: {
-//     errNotSelected:
-//       "Error: Not selected ! Please select an answer from the option !",
-//     errInvalidAnswer: "Error: You selected the wrong answer! You failed !",
-//   },
-//   textArea: {
-//     errEmpty:
-//       "Error: Field is empty ! Please enter a valid reason for sparing !",
-//     errCharCount:
-//       "Error: Reason for sparing must be between 17 and 153 characters !",
-//   },
-// };
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
@@ -100,7 +71,7 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
   const [errorLog, setErrorLog] = useState<ErrorLog>(initialErrorLog);
   const [disabled, setDisabled] = useState<boolean>(false);
 
-  const ErrorHandling = (error: ErrorLog): void => {
+  const displayError = (error: ErrorLog): void => {
     setDisabled(true);
     setErrorLog(error);
   };
@@ -111,110 +82,56 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
     setDisabled(false);
 
     if (!formData.species) {
-      ErrorHandling({
+      displayError({
         ...errorLog,
         errorSpecies: errMsgSpecies.errEmpty,
       });
-
-      // setDisabled(true);
-      // setErrorLog({
-      //   ...errorLog,
-      //   errorSpecies:
-      //     "Error: Field is empty ! Please enter a valid species name !",
-      // });
     } else if (
       !checkNumCharacters(MIN_CHAR_SPECIES, MAX_CHAR_SPECIES, formData.species)
     ) {
-      ErrorHandling({
+      displayError({
         ...errorLog,
         errorSpecies: errMsgSpecies.errCharCount,
       });
-      // setDisabled(true);
-      // setErrorLog({
-      //   ...errorLog,
-      //   errorSpecies:
-      //     "Error: Species name must be between 3 and 23 characters !",
-      // });
     } else if (!formData.planet) {
-      ErrorHandling({
+      displayError({
         ...errorLog,
         errorSpecies: errMsgPlanet.errEmpty,
       });
-      // setDisabled(true);
-      // setErrorLog({
-      //   ...errorLog,
-      //   errorPlanet:
-      //     "Error: Field is empty ! Please enter a valid planet name !",
-      // });
     } else if (
       !checkNumCharacters(MIN_CHAR_PLANET, MAX_CHAR_PLANET, formData.planet)
     ) {
-      ErrorHandling({
+      displayError({
         ...errorLog,
         errorSpecies: errMsgPlanet.errCharCount,
       });
-      //setDisabled(true);
-      // setErrorLog({
-      //   ...errorLog,
-      //   errorPlanet: "Error: Planet name must be between 2 and 49 characters !",
-      // });
     } else if (!formData.numOfBeings) {
-      ErrorHandling({
+      displayError({
         ...errorLog,
         errorNumOfBeings: errMsgNumOfBeings.errValidNumber,
       });
-      //setDisabled(true);
-      // setErrorLog({
-      //   ...errorLog,
-      //   errorNumOfBeings:
-      //     "Error: Field is empty ! Please enter a valid Number of beings !",
-      // });
     } else if (+formData.numOfBeings <= MIN_NUM_OF_BEINGS) {
-      ErrorHandling({
+      displayError({
         ...errorLog,
         errorNumOfBeings: errMsgNumOfBeings.errNum,
       });
-      //setDisabled(true);
-      // setErrorLog({
-      //   ...errorLog,
-      //   errorNumOfBeings:
-      //     "Error: Number of beings must be at least 1,000,000,000 !",
-      // });
     } else if (!formData.select) {
-      ErrorHandling({
+      displayError({
         ...errorLog,
         errorSelect: errMsgSelect.errNotSelected,
       });
-      //setDisabled(true);
-      // setErrorLog({
-      //   ...errorLog,
-      //   errorSelect:
-      //     "Error: Please select the correct answer from the option !",
-      // });
     } else if (!formData.text) {
-      ErrorHandling({
+      displayError({
         ...errorLog,
         errorTextArea: errMsgTextArea.errEmpty,
       });
-      //setDisabled(true);
-      // setErrorLog({
-      //   ...errorLog,
-      //   errorTextArea:
-      //     "Error: Field is empty ! Please enter a valid reason for sparing !",
-      // });
     } else if (
       !checkNumCharacters(MIN_CHAR_TEXTAREA, MAX_CHAR_TEXTAREA, formData.text)
     ) {
-      ErrorHandling({
+      displayError({
         ...errorLog,
         errorTextArea: errMsgTextArea.errCharCount,
       });
-      // setDisabled(true);
-      // setErrorLog({
-      //   ...errorLog,
-      //   errorTextArea:
-      //     "Error: Reason for sparing must be between 17 and 153 characters !",
-      // });
     } else {
       setDisabled(false);
       setErrorLog(initialErrorLog);

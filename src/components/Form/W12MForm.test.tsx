@@ -1,7 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import W12MForm from "./W12MForm";
-import { Data } from "../dataInterface";
+import { Data } from "./FormDataInterface";
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 const data: Data = {
   species: "Chewbacca",

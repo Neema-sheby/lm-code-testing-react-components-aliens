@@ -1,3 +1,5 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 // check if string
 export const isString = (data: string): boolean =>
   typeof data === "string" && !data.match(/[^$A-Za-z]/g) ? true : false;

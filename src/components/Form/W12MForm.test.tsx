@@ -3,7 +3,7 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import W12MForm from "./W12MForm";
-import { Data } from "./FormDataInterface";
+import { Data } from "./W12MFormDataInterface";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 

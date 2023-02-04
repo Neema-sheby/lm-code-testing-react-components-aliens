@@ -1,5 +1,5 @@
 import React from "react";
-import ErrorMessage from "../../ErrorHandling/ErrorMessage";
+import { ErrorMessage } from "../../ErrorHandling/ErrorMessage";
 
 interface SelectProp {
   ariaLabel: string;

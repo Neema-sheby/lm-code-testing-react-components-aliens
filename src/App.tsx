@@ -1,8 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 import "./App.css";
 import W12MHeader from "./components/Header/W12MHeader";
 import W12MForm from "./components/Form/W12MForm";
 import { useState } from "react";
-import { Data } from "./components/dataInterface";
+import { Data } from "./components/Form/FormDataInterface";
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 function App() {
   const [data, setData] = useState<Data>({

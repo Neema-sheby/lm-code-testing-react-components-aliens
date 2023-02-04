@@ -1,13 +1,14 @@
+import ErrorMessage from "../../ErrorHandling/ErrorMessage";
+
 interface InputProp {
   id: string;
   label: string;
   ariaLabel: string;
   type: string;
-  value: string | number;
+  value: string;
   placeholder: string;
-  minLength: number;
-  maxLength: number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  errorMessage: string;
 }
 
 const W12MInput: React.FC<InputProp> = ({
@@ -17,9 +18,8 @@ const W12MInput: React.FC<InputProp> = ({
   type,
   value,
   placeholder,
-  minLength,
-  maxLength,
   onChange,
+  errorMessage,
 }) => {
   return (
     <div role="textbox" aria-label="inputBox" className="form__input-box">
@@ -34,9 +34,8 @@ const W12MInput: React.FC<InputProp> = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        minLength={minLength}
-        maxLength={maxLength}
       />
+      <ErrorMessage errorMessage={errorMessage} />
     </div>
   );
 };

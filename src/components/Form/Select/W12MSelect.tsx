@@ -1,4 +1,5 @@
 import React from "react";
+import ErrorMessage from "../../ErrorHandling/ErrorMessage";
 
 interface SelectProp {
   ariaLabel: string;
@@ -7,6 +8,7 @@ interface SelectProp {
   label: string;
   children: React.ReactNode;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  errorMessage: string;
 }
 
 const W12MSelect: React.FC<SelectProp> = ({
@@ -16,6 +18,7 @@ const W12MSelect: React.FC<SelectProp> = ({
   label,
   onChange,
   children,
+  errorMessage,
 }) => {
   return (
     <div role="textbox" aria-label="inputBox" className="form__select-box">
@@ -31,6 +34,7 @@ const W12MSelect: React.FC<SelectProp> = ({
       >
         {children}
       </select>
+      <ErrorMessage errorMessage={errorMessage} />
     </div>
   );
 };

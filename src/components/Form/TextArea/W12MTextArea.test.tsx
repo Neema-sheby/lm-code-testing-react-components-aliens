@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import W12MTextBox from "./W12MTextBox";
-import { MIN_CHAR_TEXTAREA, MAX_CHAR_TEXTAREA } from "../../Configuration";
+import W12MTextBox from "./W12MTextArea";
 
 ///-----Test 1 -----/////////////////////////////////////////////////////////////
 
@@ -15,9 +14,8 @@ it("renders the textarea field", () => {
       placeholder="Enter the reason for sparing"
       rows={6}
       cols={100}
-      minLength={MIN_CHAR_TEXTAREA}
-      maxLength={MAX_CHAR_TEXTAREA}
       onChange={() => {}}
+      errorMessage=""
     />
   );
 
@@ -40,9 +38,8 @@ it("calls it's onChange function", async () => {
       placeholder="Enter the reason for sparing"
       rows={6}
       cols={100}
-      minLength={MIN_CHAR_TEXTAREA}
-      maxLength={MAX_CHAR_TEXTAREA}
       onChange={mock}
+      errorMessage=""
     />
   );
 
@@ -68,9 +65,8 @@ it("displays the value passed through props", () => {
       placeholder="Enter the reason for sparing"
       rows={6}
       cols={100}
-      minLength={MIN_CHAR_TEXTAREA}
-      maxLength={MAX_CHAR_TEXTAREA}
       onChange={() => {}}
+      errorMessage=""
     />
   );
 

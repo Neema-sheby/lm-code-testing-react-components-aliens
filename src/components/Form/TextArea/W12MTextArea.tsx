@@ -1,4 +1,5 @@
 import React from "react";
+import ErrorMessage from "../../ErrorHandling/ErrorMessage";
 
 interface TextBoxProp {
   ariaLabel: string;
@@ -8,9 +9,8 @@ interface TextBoxProp {
   placeholder: string;
   rows: number;
   cols: number;
-  minLength: number;
-  maxLength: number;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  errorMessage: string;
 }
 
 const W12MTextBox: React.FC<TextBoxProp> = ({
@@ -21,9 +21,8 @@ const W12MTextBox: React.FC<TextBoxProp> = ({
   placeholder,
   rows,
   cols,
-  minLength,
-  maxLength,
   onChange,
+  errorMessage,
 }) => {
   return (
     <div role="textbox" aria-label="inputBox" className="form__input-box">
@@ -38,10 +37,9 @@ const W12MTextBox: React.FC<TextBoxProp> = ({
         placeholder={placeholder}
         rows={rows}
         cols={cols}
-        minLength={minLength}
-        maxLength={maxLength}
         onChange={onChange}
       ></textarea>
+      <ErrorMessage errorMessage={errorMessage} />
     </div>
   );
 };

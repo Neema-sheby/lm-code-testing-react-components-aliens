@@ -22,6 +22,7 @@ it("renders the select field", () => {
       id="select-what"
       label="What is 2 + 2 ?"
       onChange={() => {}}
+      errorMessage=""
     >
       {options}
     </W12MSelect>
@@ -44,6 +45,7 @@ it("calls it's onChange function and also displays the selected option correctly
       id="select-what"
       label="What is 2 + 2 ?"
       onChange={mock}
+      errorMessage=""
     >
       {options}
     </W12MSelect>

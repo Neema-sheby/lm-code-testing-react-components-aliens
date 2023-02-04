@@ -1,14 +1,14 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import W12MForm from "./W12MForm";
-import { Data } from "../Interface";
+import { Data } from "../dataInterface";
 
 const data: Data = {
   species: "Chewbacca",
   planet: "Narkina",
-  numOfBeings: "3",
-  select: "Not 4",
-  text: "You were good!",
+  numOfBeings: "10000000000",
+  select: "4",
+  text: "You were good at all the activities!",
 };
 
 ///-----Test 1 -----/////////////////////////////////////////////////////////////
@@ -139,7 +139,7 @@ it("empties the input fields and select fields after form submit", async () => {
 
   //simulate click and enter the nunber of beings
   await user.click(inputFieldNumOfBeings);
-  await user.type(inputFieldNumOfBeings, data.numOfBeings);
+  await user.type(inputFieldNumOfBeings, data.numOfBeings.toString());
 
   //simulate click and select the option
   await user.click(selectField);

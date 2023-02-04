@@ -11,9 +11,6 @@ export const isNumber = (data: string): boolean => {
   return data.match(/[^0-9]/g) ? false : true;
 };
 
-// check if empty
-export const isEmpty = (data: string | number) => (data === "" ? true : false);
-
 // check character count
 export const checkNumCharacters = (
   minLength: number,

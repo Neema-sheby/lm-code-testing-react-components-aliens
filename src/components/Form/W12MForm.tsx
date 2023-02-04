@@ -8,7 +8,6 @@ import W12MButton from "../Button/W12MButton";
 import { Data } from "../dataInterface";
 import {
   isString,
-  isEmpty,
   checkNumCharacters,
   isStringAndNumberOnly,
   isNumber,
@@ -67,7 +66,7 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
     setErrorLog(initialErrorLog);
     setDisabled(false);
 
-    if (isEmpty(formData.species)) {
+    if (!formData.species) {
       setDisabled(true);
       setErrorLog({
         ...errorLog,
@@ -83,7 +82,7 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
         errorSpecies:
           "Error: Species name must be between 3 and 23 characters !",
       });
-    } else if (isEmpty(formData.planet)) {
+    } else if (!formData.planet) {
       setDisabled(true);
       setErrorLog({
         ...errorLog,
@@ -98,7 +97,7 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
         ...errorLog,
         errorPlanet: "Error: Planet name must be between 2 and 49 characters !",
       });
-    } else if (isEmpty(formData.numOfBeings)) {
+    } else if (!formData.numOfBeings) {
       setDisabled(true);
       setErrorLog({
         ...errorLog,
@@ -112,14 +111,14 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
         errorNumOfBeings:
           "Error: Number of beings must be at least 1,000,000,000 !",
       });
-    } else if (isEmpty(formData.select)) {
+    } else if (!formData.select) {
       setDisabled(true);
       setErrorLog({
         ...errorLog,
         errorSelect:
           "Error: Please select the correct answer from the option !",
       });
-    } else if (isEmpty(formData.text)) {
+    } else if (!formData.text) {
       setDisabled(true);
       setErrorLog({
         ...errorLog,

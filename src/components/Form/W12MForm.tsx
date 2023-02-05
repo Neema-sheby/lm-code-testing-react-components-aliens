@@ -48,6 +48,12 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
   const [displayData, setDisplayData] = useState<Data>(initialDataValue);
   const [errorLog, setErrorLog] = useState<ErrorLog>(initialErrorLog);
   const [disabled, setDisabled] = useState<boolean>(false);
+  const [submitted, setSubmitted] = useState<boolean>(false);
+
+  //display the submitted data
+  const displaySubmittedMsg = () => {
+    return submitted ? "form__data show" : "hide";
+  };
 
   // display the error messages
   const displayError = (error: ErrorLog): void => {
@@ -116,6 +122,7 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
       setDisabled(false);
       setErrorLog(initialErrorLog);
       setDisplayData(formData);
+      setSubmitted(true);
       onSubmit(formData);
       setFormData(initialDataValue);
     }
@@ -167,7 +174,7 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
         <W12MInput
           ariaLabel="num-of-beings"
           id="num-of-beings"
-          label="Number of Beings"
+          label="Number of beings"
           type="text"
           value={formData.numOfBeings}
           placeholder="Enter the number of Beings"
@@ -231,13 +238,31 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
           disabled={disabled}
         />
       </form>
-      <ul>
-        <li>{displayData.species}</li>
-        <li>{displayData.planet}</li>
-        <li>{displayData.numOfBeings}</li>
-        <li>{displayData.select}</li>
-        <li>{displayData.text}</li>
-      </ul>
+      <div className={displaySubmittedMsg()}>
+        <h3>Your Submitted Data</h3>
+        <ul className="form__list">
+          <li className="form__item">
+            <span>Species Name : </span>
+            {displayData.species}
+          </li>
+          <li className="form__item">
+            <span>Planet Name : </span>
+            {displayData.planet}
+          </li>
+          <li className="form__item">
+            <span>Number of beings : </span>
+            {displayData.numOfBeings}
+          </li>
+          <li className="form__item">
+            <span>What is 2 + 2 ? </span>
+            {displayData.select}
+          </li>
+          <li className="form__item">
+            <span>Reason for sparing : </span>
+            {displayData.text}
+          </li>
+        </ul>
+      </div>
     </>
   );
 };

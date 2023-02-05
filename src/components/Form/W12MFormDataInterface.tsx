@@ -7,3 +7,11 @@ export interface Data {
   select: string;
   text: string;
 }
+
+export const initialDataValue: Data = {
+  species: "",
+  planet: "",
+  numOfBeings: "",
+  select: "",
+  text: "",
+};

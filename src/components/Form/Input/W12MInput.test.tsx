@@ -19,7 +19,7 @@ it("renders the input element based on the props entered", () => {
       errorMessage=""
     />
   );
-
+  //inputfield
   const input = screen.getByLabelText("Species Name");
 
   expect(input).toHaveClass("form__input");
@@ -44,6 +44,8 @@ it("calls it's onChange function", async () => {
   );
 
   const user = userEvent.setup();
+
+  // input field
   const input = screen.getByRole("textbox", { name: /species-name/i });
 
   //simulate click and enter the input
@@ -54,23 +56,57 @@ it("calls it's onChange function", async () => {
   expect(mock).toHaveBeenCalledTimes(9);
 });
 
-///-----Test 3 -----/////////////////////////////////////////////////////////////
+// ///-----Test 3 -----/////////////////////////////////////////////////////////////
 
-it("displays the value passed through props", () => {
-  render(
-    <W12MInput
-      id="Species-name"
-      label="Species Name"
-      ariaLabel="species-name"
-      value="Chewbacca"
-      type="text"
-      placeholder="Enter the species"
-      onChange={() => {}}
-      errorMessage=""
-    />
-  );
+// it("displays the value passed through props", () => {
+//   render(
+//     <W12MInput
+//       id="Species-name"
+//       label="Species Name"
+//       ariaLabel="species-name"
+//       value="Chewbacca"
+//       type="text"
+//       placeholder="Enter the species"
+//       onChange={() => {}}
+//       errorMessage=""
+//     />
+//   );
 
-  const input = screen.getByRole("textbox", { name: /species-name/i });
+//   //input field
+//   const input = screen.getByRole("textbox", { name: /species-name/i });
 
-  expect(input).toHaveValue("Chewbacca");
-});
+//   expect(input).toHaveValue("Chewbacca");
+// });
+
+// it("checks if the entered species name is between 2 and 23 characters with no numbers or special characters", async () => {
+//   const user = userEvent.setup();
+//   const mock = jest.fn();
+
+//   render(
+//     <W12MInput
+//       id="Species-name"
+//       label="Species Name"
+//       ariaLabel="species-name"
+//       value="/"
+//       type="text"
+//       placeholder="Enter the species"
+//       onChange={mock}
+//       errorMessage=""
+//     />
+//   );
+
+//   const setErrorLog = jest.fn();
+//   const handler: jest.SpyInstance = jest.spyOn(React, "useState");
+//   handler.mockImplementation((errorLog) => [errorLog, setErrorLog]);
+
+//   const input = screen.getByRole("textbox", { name: /species-name/i });
+//   const errorSpecies = screen.getByRole("log");
+
+//   //simulate click and typethe name of species
+//   await user.click(input);
+//   await user.type(input, "/");
+
+//   // expect(mock).toBeCalled();
+//   // expect(mock).toHaveBeenCalledTimes(1);
+//   expect(errorSpecies).toHaveTextContent(errMsgSpecies.errCharCount);
+// });

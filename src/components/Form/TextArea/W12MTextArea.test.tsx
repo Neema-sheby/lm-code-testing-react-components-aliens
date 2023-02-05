@@ -20,7 +20,7 @@ it("renders the textarea field", () => {
       errorMessage=""
     />
   );
-
+  //text area
   const textArea = screen.getByRole("textbox", { name: "textArea-reason" });
 
   expect(textArea).toBeInTheDocument();
@@ -48,6 +48,7 @@ it("calls it's onChange function", async () => {
   const user = userEvent.setup();
   const textArea = screen.getByRole("textbox", { name: /textArea-reason/i });
 
+  //Simulate clicking on the textarea and typing in textfield
   await user.click(textArea);
   await user.type(textArea, "I'm a good person");
 
@@ -72,6 +73,7 @@ it("displays the value passed through props", () => {
     />
   );
 
+  //textarea
   const textArea = screen.getByRole("textbox", { name: /textArea-reason/i });
 
   expect(textArea).toHaveValue("I'm a good person");

@@ -32,6 +32,7 @@ it("renders the select field", () => {
     </W12MSelect>
   );
 
+  //select field
   const select = screen.getByRole("combobox", { name: "select-what" });
 
   expect(select).toBeInTheDocument();

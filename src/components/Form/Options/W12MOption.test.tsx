@@ -8,6 +8,7 @@ import W12MOption from "./W12MOption";
 it("renders the option field", () => {
   render(<W12MOption value="Not 4">Not 4</W12MOption>);
 
+  //option field
   const optionField = screen.getByRole("option");
 
   expect(optionField).toBeInTheDocument();
@@ -16,6 +17,7 @@ it("renders the option field", () => {
 it("The props are working well", () => {
   render(<W12MOption value="Not 4">Not 4</W12MOption>);
 
+  //option field
   const optionField = screen.getByRole("option");
 
   expect(optionField).toHaveValue("Not 4");

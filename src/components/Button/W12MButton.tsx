@@ -7,16 +7,23 @@ import React from "react";
 interface ButtonProp {
   className: string;
   disabled: boolean;
-  children: React.ReactNode;
+  buttonName: string;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-const W12Button: React.FC<ButtonProp> = ({ className, disabled, children }) => {
+const W12Button: React.FC<ButtonProp> = ({
+  className,
+  disabled,
+  buttonName,
+}) => {
   return (
-    <button className={className} disabled={disabled}>
-      {children}
-    </button>
+    <input
+      type="submit"
+      className={className}
+      value={buttonName}
+      disabled={disabled}
+    />
   );
 };
 

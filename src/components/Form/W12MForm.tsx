@@ -5,7 +5,7 @@ import W12MOption from "./Options/W12MOption";
 import { OPTIONS } from "./Options/OptionsData";
 import W12MTextBox from "./TextArea/W12MTextArea";
 import W12MButton from "../Button/W12MButton";
-import { Data } from "./W12MFormDataInterface";
+import { Data, initialDataValue } from "./W12MFormDataInterface";
 import {
   isString,
   checkNumCharacters,
@@ -26,6 +26,8 @@ import {
 } from "../Configuration";
 
 import {
+  ErrorLog,
+  initialErrorLog,
   errMsgSpecies,
   errMsgPlanet,
   errMsgNumOfBeings,
@@ -39,30 +41,6 @@ interface FormProp {
   onSubmit: (data: Data) => void;
 }
 
-interface ErrorLog {
-  errorSpecies: string;
-  errorPlanet: string;
-  errorNumOfBeings: string;
-  errorSelect: string;
-  errorTextArea: string;
-}
-
-const initialDataValue: Data = {
-  species: "",
-  planet: "",
-  numOfBeings: "",
-  select: "",
-  text: "",
-};
-
-const initialErrorLog: ErrorLog = {
-  errorSpecies: "",
-  errorPlanet: "",
-  errorNumOfBeings: "",
-  errorSelect: "",
-  errorTextArea: "",
-};
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
@@ -71,11 +49,13 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
   const [errorLog, setErrorLog] = useState<ErrorLog>(initialErrorLog);
   const [disabled, setDisabled] = useState<boolean>(false);
 
+  // display the error messages
   const displayError = (error: ErrorLog): void => {
     setDisabled(true);
     setErrorLog(error);
   };
 
+  // function called on submitting form
   const onSubmitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
     setErrorLog(initialErrorLog);
@@ -96,21 +76,21 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
     } else if (!formData.planet) {
       displayError({
         ...errorLog,
-        errorSpecies: errMsgPlanet.errEmpty,
+        errorPlanet: errMsgPlanet.errEmpty,
       });
     } else if (
       !checkNumCharacters(MIN_CHAR_PLANET, MAX_CHAR_PLANET, formData.planet)
     ) {
       displayError({
         ...errorLog,
-        errorSpecies: errMsgPlanet.errCharCount,
+        errorPlanet: errMsgPlanet.errCharCount,
       });
     } else if (!formData.numOfBeings) {
       displayError({
         ...errorLog,
         errorNumOfBeings: errMsgNumOfBeings.errValidNumber,
       });
-    } else if (+formData.numOfBeings <= MIN_NUM_OF_BEINGS) {
+    } else if (+formData.numOfBeings < MIN_NUM_OF_BEINGS) {
       displayError({
         ...errorLog,
         errorNumOfBeings: errMsgNumOfBeings.errNum,
@@ -245,9 +225,11 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
           }}
           errorMessage={errorLog.errorTextArea}
         ></W12MTextBox>
-        <W12MButton className="btn--form" disabled={disabled}>
-          Submit Form
-        </W12MButton>
+        <W12MButton
+          className="btn--form"
+          buttonName="Submit Form"
+          disabled={disabled}
+        />
       </form>
       <ul>
         <li>{displayData.species}</li>

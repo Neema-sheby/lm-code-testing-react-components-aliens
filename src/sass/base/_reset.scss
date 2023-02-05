@@ -5,9 +5,22 @@
 }
 #root {
   width: 100%;
+}
+
+body {
   padding: 10rem;
   background-image: url("./images/adrien-olichon-Svsc04xWIb0-unsplash.jpg");
+
+  @include respond(tab-land) {
+    padding: 4rem;
+  }
+
+  @include respond(tab-port) {
+    padding: 2rem;
+  }
+
   @include respond(phone) {
+    padding: 0;
   }
 }
 

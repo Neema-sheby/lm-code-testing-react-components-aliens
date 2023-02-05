@@ -10,10 +10,17 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+
+    @include respond(tab-port) {
+      flex-direction: column;
+    }
   }
 
   &__label {
     width: 25%;
+    @include respond(tab-port) {
+      width: 100%;
+    }
   }
 
   &__input,
@@ -37,14 +44,21 @@
 
   &__input,
   &__select {
-    width: 40%;
+    width: 70%;
     height: 3rem;
+
+    @include respond(tab-port) {
+      width: 100%;
+    }
   }
 
   &__textArea {
     font-family: "Play", Arial, Helvetica, sans-serif;
     width: 70%;
     height: 8rem;
+    @include respond(tab-port) {
+      width: 100%;
+    }
   }
 
   &__select {
@@ -57,4 +71,42 @@
     font-size: 1rem;
     color: $color-red--danger;
   }
+
+  &__data {
+    margin-top: 2rem;
+    background-color: $color-grey--light;
+    padding: 1.5rem;
+    border-radius: $border-radius;
+    -webkit-border-radius: $border-radius;
+    -moz-border-radius: $border-radius;
+    -ms-border-radius: $border-radius;
+    -o-border-radius: $border-radius;
+
+    h3 {
+      border-bottom: 0.01rem solid $color-white--light;
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    font-size: 1rem;
+    margin-top: 2rem;
+
+    span {
+      font-weight: 700;
+    }
+  }
+
+  &__item {
+    margin: 0.5rem 0;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
 }

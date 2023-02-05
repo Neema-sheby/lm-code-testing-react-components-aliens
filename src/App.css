@@ -4,9 +4,20 @@
   box-sizing: border-box; }
 
 #root {
-  width: 100%;
+  width: 100%; }
+
+body {
   padding: 10rem;
   background-image: url("./images/adrien-olichon-Svsc04xWIb0-unsplash.jpg"); }
+  @media only screen and (max-width: 75rem) {
+    body {
+      padding: 4rem; } }
+  @media only screen and (max-width: 56.25rem) {
+    body {
+      padding: 2rem; } }
+  @media only screen and (max-width: 37.5rem) {
+    body {
+      padding: 0; } }
 
 .container--form {
   width: 100%;
@@ -29,6 +40,9 @@ body {
   font-size: 2.2rem;
   border-bottom: 0.01rem solid rgba(255, 255, 255, 0.3);
   padding-bottom: 2rem; }
+  @media only screen and (max-width: 37.5rem) {
+    .heading--1 {
+      font-size: 2rem; } }
 
 .btn--form {
   font-family: "Play", Arial, Helvetica, sans-serif;
@@ -45,6 +59,9 @@ body {
   -moz-transition: 0.2s all;
   -ms-transition: 0.2s all;
   -o-transition: 0.2s all; }
+  @media only screen and (max-width: 37.5rem) {
+    .btn--form {
+      width: 100%; } }
   .btn--form:hover {
     box-shadow: 0 0 0.2rem 0.2rem rgba(0, 0, 0, 0.2); }
 
@@ -55,9 +72,15 @@ body {
   padding: 5rem 3rem;
   border-top-left-radius: 0.3rem;
   border-top-right-radius: 0.3rem; }
+  @media only screen and (max-width: 37.5rem) {
+    .header {
+      padding: 3rem 2rem; } }
   .header ul {
     font-size: 1.2rem;
     margin-top: 4rem; }
+    @media only screen and (max-width: 37.5rem) {
+      .header ul {
+        margin-top: 2rem; } }
     .header ul li {
       margin: 0.8rem 0; }
 
@@ -71,8 +94,14 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem; }
+    @media only screen and (max-width: 56.25rem) {
+      .form__input-box, .form__select-box {
+        flex-direction: column; } }
   .form__label {
     width: 25%; }
+    @media only screen and (max-width: 56.25rem) {
+      .form__label {
+        width: 100%; } }
   .form__input, .form__select, .form__textArea {
     border-radius: 0.3rem;
     -webkit-border-radius: 0.3rem;
@@ -87,12 +116,18 @@ body {
       font-size: 1rem;
       color: #535c68; }
   .form__input, .form__select {
-    width: 40%;
+    width: 70%;
     height: 3rem; }
+    @media only screen and (max-width: 56.25rem) {
+      .form__input, .form__select {
+        width: 100%; } }
   .form__textArea {
     font-family: "Play", Arial, Helvetica, sans-serif;
     width: 70%;
     height: 8rem; }
+    @media only screen and (max-width: 56.25rem) {
+      .form__textArea {
+        width: 100%; } }
   .form__select {
     font-family: "Play", Arial, Helvetica, sans-serif;
     font-size: 1rem;
@@ -100,6 +135,32 @@ body {
   .form__error {
     font-size: 1rem;
     color: #d9534f; }
+  .form__data {
+    margin-top: 2rem;
+    background-color: #ecf0f1;
+    padding: 1.5rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem; }
+    .form__data h3 {
+      border-bottom: 0.01rem solid rgba(255, 255, 255, 0.3);
+      padding-bottom: 0.5rem; }
+  .form__list {
+    list-style: none;
+    font-size: 1rem;
+    margin-top: 2rem; }
+    .form__list span {
+      font-weight: 700; }
+  .form__item {
+    margin: 0.5rem 0; }
+
+.hide {
+  display: none; }
+
+.show {
+  display: block; }
 
 .section--form {
   background-color: #fff;
@@ -107,3 +168,6 @@ body {
   padding: 3rem;
   border-bottom-left-radius: 0.3rem;
   border-bottom-right-radius: 0.3rem; }
+  @media only screen and (max-width: 37.5rem) {
+    .section--form {
+      padding: 2rem; } }

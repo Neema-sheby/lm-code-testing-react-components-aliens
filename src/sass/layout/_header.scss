@@ -6,9 +6,17 @@
   border-top-left-radius: 0.3rem;
   border-top-right-radius: 0.3rem;
 
+  @include respond(phone) {
+    padding: 3rem 2rem;
+  }
+
   ul {
     font-size: 1.2rem;
     margin-top: 4rem;
+
+    @include respond(phone) {
+      margin-top: 2rem;
+    }
 
     li {
       margin: 0.8rem 0;

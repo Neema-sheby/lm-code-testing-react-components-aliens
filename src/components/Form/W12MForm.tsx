@@ -96,15 +96,14 @@ const W12MForm: React.FC = () => {
             setFormData({ ...formData, twoPlusTwo: e.target.value });
           }}
           onValidate={error.twoPlusTwo}
-        >
-          {OPTIONS.map((option, i) => {
+          options={OPTIONS.map((option, i) => {
             return (
               <W12MOption key={i + option.value} value={option.value}>
                 {option.label}
               </W12MOption>
             );
           })}
-        </W12MSelect>
+        />
 
         <W12MTextBox
           ariaLabel="textArea-reason"

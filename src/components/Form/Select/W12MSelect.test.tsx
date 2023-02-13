@@ -23,9 +23,8 @@ it("renders the select field", () => {
       label="What is 2 + 2 ?"
       onChange={() => {}}
       onValidate={[]}
-    >
-      {options}
-    </W12MSelect>
+      options={options}
+    />
   );
 
   //select field
@@ -47,9 +46,8 @@ it("calls it's onChange function and also displays the selected option correctly
       label="What is 2 + 2 ?"
       onChange={mock}
       onValidate={[]}
-    >
-      {options}
-    </W12MSelect>
+      options={options}
+    />
   );
 
   const user = userEvent.setup();

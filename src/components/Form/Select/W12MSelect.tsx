@@ -6,7 +6,7 @@ interface SelectProp {
   value: string;
   id: string;
   label: string;
-  children: React.ReactNode;
+  options: React.ReactNode;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   onValidate: Array<string>;
 }
@@ -17,7 +17,7 @@ const W12MSelect: React.FC<SelectProp> = ({
   id,
   label,
   onChange,
-  children,
+  options,
   onValidate,
 }) => {
   return (
@@ -32,7 +32,7 @@ const W12MSelect: React.FC<SelectProp> = ({
         id={id}
         onChange={onChange}
       >
-        {children}
+        {options}
       </select>
       <ErrorMessage onValidate={onValidate} />
     </div>

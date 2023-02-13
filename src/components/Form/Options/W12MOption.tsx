@@ -1,10 +1,10 @@
 export interface OptionProp {
   value: string;
-  children: React.ReactNode;
+  label: React.ReactNode;
 }
 
-const W12MOption: React.FC<OptionProp> = ({ value, children }) => {
-  return <option value={value}>{children}</option>;
+const W12MOption: React.FC<OptionProp> = ({ value, label }) => {
+  return <option value={value}>{label}</option>;
 };
 
 export default W12MOption;

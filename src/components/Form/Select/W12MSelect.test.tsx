@@ -6,9 +6,11 @@ import { OPTIONS } from "../Options/OptionsData";
 
 const options = OPTIONS.map((option, i) => {
   return (
-    <W12MOption key={i + option.value} value={option.value}>
-      {option.label}
-    </W12MOption>
+    <W12MOption
+      key={i + option.value}
+      value={option.value}
+      label={option.label}
+    />
   );
 });
 

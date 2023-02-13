@@ -98,9 +98,11 @@ const W12MForm: React.FC = () => {
           onValidate={error.twoPlusTwo}
           options={OPTIONS.map((option, i) => {
             return (
-              <W12MOption key={i + option.value} value={option.value}>
-                {option.label}
-              </W12MOption>
+              <W12MOption
+                key={i + option.value}
+                value={option.value}
+                label={option.label}
+              />
             );
           })}
         />

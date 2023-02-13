@@ -1,10 +1,10 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-import { screen, render } from "@testing-library/react";
+import { screen, render, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import W12MInput from "./W12MInput";
 
-///-----Test 1 -----/////////////////////////////////////////////////////////////
+import { errMsgSpecies } from "../../ErrorHandling/ErrorMessage";
+
+///-----Test 1 -----
 
 it("renders the input element based on the props entered", () => {
   render(
@@ -16,7 +16,7 @@ it("renders the input element based on the props entered", () => {
       type="text"
       placeholder="Enter the species"
       onChange={() => {}}
-      errorMessage=""
+      onValidate={[]}
     />
   );
   //inputfield
@@ -25,7 +25,7 @@ it("renders the input element based on the props entered", () => {
   expect(input).toHaveClass("form__input");
 });
 
-///-----Test 2 -----/////////////////////////////////////////////////////////////
+///-----Test 2 -----
 
 it("calls it's onChange function", async () => {
   const mock = jest.fn();
@@ -39,7 +39,7 @@ it("calls it's onChange function", async () => {
       type="text"
       placeholder="Enter the species"
       onChange={mock}
-      errorMessage=""
+      onValidate={[]}
     />
   );
 
@@ -48,65 +48,75 @@ it("calls it's onChange function", async () => {
   // input field
   const input = screen.getByRole("textbox", { name: /species-name/i });
 
-  //simulate click and enter the input
-  await user.click(input);
+  //simulate enter the input
   await user.type(input, "Chewbacca");
 
   expect(mock).toBeCalled();
   expect(mock).toHaveBeenCalledTimes(9);
 });
 
-// ///-----Test 3 -----/////////////////////////////////////////////////////////////
+///-----Test 3 -----
 
-// it("displays the value passed through props", () => {
-//   render(
-//     <W12MInput
-//       id="Species-name"
-//       label="Species Name"
-//       ariaLabel="species-name"
-//       value="Chewbacca"
-//       type="text"
-//       placeholder="Enter the species"
-//       onChange={() => {}}
-//       errorMessage=""
-//     />
-//   );
+it("displays the value passed through props", () => {
+  render(
+    <W12MInput
+      id="Species-name"
+      label="Species Name"
+      ariaLabel="species-name"
+      value="Chewbacca"
+      type="text"
+      placeholder="Enter the species"
+      onChange={() => {}}
+      onValidate={[]}
+    />
+  );
 
-//   //input field
-//   const input = screen.getByRole("textbox", { name: /species-name/i });
+  const input = screen.getByRole("textbox", { name: /species-name/i });
 
-//   expect(input).toHaveValue("Chewbacca");
-// });
+  expect(input).toHaveValue("Chewbacca");
+});
 
-// it("checks if the entered species name is between 2 and 23 characters with no numbers or special characters", async () => {
-//   const user = userEvent.setup();
-//   const mock = jest.fn();
+///-----Test 4 -----
 
-//   render(
-//     <W12MInput
-//       id="Species-name"
-//       label="Species Name"
-//       ariaLabel="species-name"
-//       value="/"
-//       type="text"
-//       placeholder="Enter the species"
-//       onChange={mock}
-//       errorMessage=""
-//     />
-//   );
+it("checks if the entered species name is between 2 and 23 characters with no numbers or special characters", () => {
+  render(
+    <W12MInput
+      id="Species-name"
+      label="Species Name"
+      ariaLabel="species-name"
+      value="a"
+      type="text"
+      placeholder="Enter the species"
+      onChange={() => {}}
+      onValidate={[errMsgSpecies.errCharCount]}
+    />
+  );
 
-//   const setErrorLog = jest.fn();
-//   const handler: jest.SpyInstance = jest.spyOn(React, "useState");
-//   handler.mockImplementation((errorLog) => [errorLog, setErrorLog]);
+  const errorSpecies = screen.getByRole("log");
 
-//   const input = screen.getByRole("textbox", { name: /species-name/i });
-//   const errorSpecies = screen.getByRole("log");
+  expect(errorSpecies).toHaveTextContent(errMsgSpecies.errCharCount);
+});
 
-//   //simulate click and typethe name of species
-//   await user.click(input);
-//   await user.type(input, "/");
+///-----Test 5 -----
 
-//   // expect(mock).toBeCalled();
-//   // expect(mock).toHaveBeenCalledTimes(1);
-//   expect(errorSpecies).toHaveTextContent(errMsgSpecies.errCharCount);
-// });
+it("checks if the entered species name is a valid string", () => {
+  render(
+    <W12MInput
+      id="Species-name"
+      label="Species Name"
+      ariaLabel="species-name"
+      value=""
+      type="text"
+      placeholder="Enter the species"
+      onChange={() => {}}
+      onValidate={[errMsgSpecies.errValidString]}
+    />
+  );
+
+  const errorSpecies = screen.getByRole("log");
+  const errMsgElement = within(errorSpecies).getByText(
+    errMsgSpecies.errValidString
+  );
+
+  expect(errMsgElement).toHaveTextContent(errMsgSpecies.errValidString);
+});

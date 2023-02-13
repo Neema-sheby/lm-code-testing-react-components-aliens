@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import W12MHeader from "./W12MHeader";
 
-///-----Test 1 -----/////////////////////////////////////////////////////////////
+///-----Test 1 -----
 
 it("renders main heading (h1 element)", () => {
   render(<W12MHeader />);
@@ -13,7 +13,7 @@ it("renders main heading (h1 element)", () => {
   );
 });
 
-///-----Test 2 -----/////////////////////////////////////////////////////////////
+///-----Test 2 -----
 
 it("renders header text", () => {
   render(<W12MHeader />);

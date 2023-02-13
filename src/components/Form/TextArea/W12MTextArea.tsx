@@ -1,9 +1,5 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
 import React from "react";
 import { ErrorMessage } from "../../ErrorHandling/ErrorMessage";
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 interface TextBoxProp {
   ariaLabel: string;
@@ -14,10 +10,8 @@ interface TextBoxProp {
   rows: number;
   cols: number;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  errorMessage: string;
+  onValidate: Array<string>;
 }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 const W12MTextBox: React.FC<TextBoxProp> = ({
   ariaLabel,
@@ -28,7 +22,7 @@ const W12MTextBox: React.FC<TextBoxProp> = ({
   rows,
   cols,
   onChange,
-  errorMessage,
+  onValidate,
 }) => {
   return (
     <div role="textbox" aria-label="inputBox" className="form__input-box">
@@ -45,7 +39,7 @@ const W12MTextBox: React.FC<TextBoxProp> = ({
         cols={cols}
         onChange={onChange}
       ></textarea>
-      <ErrorMessage errorMessage={errorMessage} />
+      <ErrorMessage onValidate={onValidate} />
     </div>
   );
 };

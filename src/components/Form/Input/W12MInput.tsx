@@ -1,8 +1,4 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
 import { ErrorMessage } from "../../ErrorHandling/ErrorMessage";
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 interface InputProp {
   id: string;
@@ -12,10 +8,8 @@ interface InputProp {
   value: string;
   placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  errorMessage: string;
+  onValidate: Array<string>;
 }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 const W12MInput: React.FC<InputProp> = ({
   id,
@@ -25,7 +19,7 @@ const W12MInput: React.FC<InputProp> = ({
   value,
   placeholder,
   onChange,
-  errorMessage,
+  onValidate,
 }) => {
   return (
     <div role="textbox" aria-label="inputBox" className="form__input-box">
@@ -38,10 +32,10 @@ const W12MInput: React.FC<InputProp> = ({
         type={type}
         id={id}
         value={value}
-        onChange={onChange}
         placeholder={placeholder}
+        onChange={onChange}
       />
-      <ErrorMessage errorMessage={errorMessage} />
+      <ErrorMessage onValidate={onValidate} />
     </div>
   );
 };

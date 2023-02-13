@@ -1,5 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
 export const MIN_CHAR_SPECIES: number = 3;
 export const MAX_CHAR_SPECIES: number = 23;
 export const MIN_CHAR_PLANET: number = 2;

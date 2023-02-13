@@ -1,17 +1,15 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-export interface Data {
+export interface W12FormData {
   species: string;
   planet: string;
   numOfBeings: string;
-  select: string;
-  text: string;
+  twoPlusTwo: string;
+  reasonForSparing: string;
 }
 
-export const initialDataValue: Data = {
+export const initialDataValue: W12FormData = {
   species: "",
   planet: "",
   numOfBeings: "",
-  select: "",
-  text: "",
+  twoPlusTwo: "",
+  reasonForSparing: "",
 };

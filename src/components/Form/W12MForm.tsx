@@ -5,132 +5,33 @@ import W12MOption from "./Options/W12MOption";
 import { OPTIONS } from "./Options/OptionsData";
 import W12MTextBox from "./TextArea/W12MTextArea";
 import W12MButton from "../Button/W12MButton";
-import { Data, initialDataValue } from "./W12MFormDataInterface";
+import { W12FormData, initialDataValue } from "./W12MFormDataInterface";
+
+import { ErrorLog, initialErrorLog } from "../ErrorHandling/ErrorMessage";
 import {
-  isString,
-  checkNumCharacters,
-  isStringAndNumberOnly,
-  isNumber,
-} from "../ErrorHandling/dataValidation";
+  validateSpeciesName,
+  validatePlanetName,
+  validateNumberOfBeings,
+  validateTwoPlusTwo,
+  validateReason,
+} from "../Validation/Validate";
 
-import {
-  MIN_CHAR_SPECIES,
-  MAX_CHAR_SPECIES,
-  MIN_CHAR_PLANET,
-  MAX_CHAR_PLANET,
-  MIN_NUM_OF_BEINGS,
-  MIN_CHAR_TEXTAREA,
-  MAX_CHAR_TEXTAREA,
-  TEXTAREA_ROW_NUM,
-  TEXTAREA_COL_NUM,
-} from "../Configuration";
+import { TEXTAREA_ROW_NUM, TEXTAREA_COL_NUM } from "../../config/Configuration";
 
-import {
-  ErrorLog,
-  initialErrorLog,
-  errMsgSpecies,
-  errMsgPlanet,
-  errMsgNumOfBeings,
-  errMsgSelect,
-  errMsgTextArea,
-} from "../ErrorHandling/ErrorMessage";
+const W12MForm: React.FC = () => {
+  const [formData, setFormData] = useState<W12FormData>(initialDataValue);
+  const [displayData, setDisplayData] = useState<W12FormData>(initialDataValue);
+  const [error, setError] = useState<ErrorLog>(initialErrorLog);
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-interface FormProp {
-  onSubmit: (data: Data) => void;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
-  const [formData, setFormData] = useState<Data>(initialDataValue);
-  const [displayData, setDisplayData] = useState<Data>(initialDataValue);
-  const [errorLog, setErrorLog] = useState<ErrorLog>(initialErrorLog);
-  const [disabled, setDisabled] = useState<boolean>(false);
-  const [submitted, setSubmitted] = useState<boolean>(false);
-
-  //display the submitted data
-  const displaySubmittedMsg = () => {
-    return submitted ? "form__data show" : "hide";
-  };
-
-  // display the error messages
-  const displayError = (error: ErrorLog): void => {
-    setDisabled(true);
-    setErrorLog(error);
-  };
-
-  // function called on submitting form
-  const onSubmitHandler = (e: React.SyntheticEvent) => {
+  const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setErrorLog(initialErrorLog);
-    setDisabled(false);
-
-    if (!formData.species) {
-      displayError({
-        ...errorLog,
-        errorSpecies: errMsgSpecies.errEmpty,
-      });
-    } else if (
-      !checkNumCharacters(MIN_CHAR_SPECIES, MAX_CHAR_SPECIES, formData.species)
-    ) {
-      displayError({
-        ...errorLog,
-        errorSpecies: errMsgSpecies.errCharCount,
-      });
-    } else if (!formData.planet) {
-      displayError({
-        ...errorLog,
-        errorPlanet: errMsgPlanet.errEmpty,
-      });
-    } else if (
-      !checkNumCharacters(MIN_CHAR_PLANET, MAX_CHAR_PLANET, formData.planet)
-    ) {
-      displayError({
-        ...errorLog,
-        errorPlanet: errMsgPlanet.errCharCount,
-      });
-    } else if (!formData.numOfBeings) {
-      displayError({
-        ...errorLog,
-        errorNumOfBeings: errMsgNumOfBeings.errValidNumber,
-      });
-    } else if (+formData.numOfBeings < MIN_NUM_OF_BEINGS) {
-      displayError({
-        ...errorLog,
-        errorNumOfBeings: errMsgNumOfBeings.errNum,
-      });
-    } else if (!formData.select) {
-      displayError({
-        ...errorLog,
-        errorSelect: errMsgSelect.errNotSelected,
-      });
-    } else if (!formData.text) {
-      displayError({
-        ...errorLog,
-        errorTextArea: errMsgTextArea.errEmpty,
-      });
-    } else if (
-      !checkNumCharacters(MIN_CHAR_TEXTAREA, MAX_CHAR_TEXTAREA, formData.text)
-    ) {
-      displayError({
-        ...errorLog,
-        errorTextArea: errMsgTextArea.errCharCount,
-      });
-    } else {
-      setDisabled(false);
-      setErrorLog(initialErrorLog);
-      setDisplayData(formData);
-      setSubmitted(true);
-      onSubmit(formData);
-      setFormData(initialDataValue);
-    }
+    setDisplayData(formData);
+    setFormData(initialDataValue);
   };
 
   return (
     <>
-      <form className="form" aria-label="W12form-1" onSubmit={onSubmitHandler}>
+      <form className="form" aria-label="W12form-1" onSubmit={onSubmit}>
         <W12MInput
           ariaLabel="Species-name"
           id="Species-name"
@@ -139,16 +40,13 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
           value={formData.species}
           placeholder="Enter the species name"
           onChange={(e) => {
-            setDisabled(false);
-            setErrorLog(initialErrorLog);
-            isString(e.target.value)
-              ? setFormData({ ...formData, species: e.target.value })
-              : setErrorLog({
-                  ...errorLog,
-                  errorSpecies: errMsgSpecies.errValidString,
-                });
+            setError({
+              ...error,
+              species: validateSpeciesName(e.target.value),
+            });
+            setFormData({ ...formData, species: e.target.value });
           }}
-          errorMessage={errorLog.errorSpecies}
+          onValidate={error.species}
         />
 
         <W12MInput
@@ -159,16 +57,13 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
           value={formData.planet}
           placeholder="Enter the planet name"
           onChange={(e) => {
-            setDisabled(false);
-            setErrorLog(initialErrorLog);
-            isStringAndNumberOnly(e.target.value)
-              ? setFormData({ ...formData, planet: e.target.value })
-              : setErrorLog({
-                  ...errorLog,
-                  errorPlanet: errMsgPlanet.errValidString,
-                });
+            setError({
+              ...error,
+              planet: validatePlanetName(e.target.value),
+            });
+            setFormData({ ...formData, planet: e.target.value });
           }}
-          errorMessage={errorLog.errorPlanet}
+          onValidate={error.planet}
         />
 
         <W12MInput
@@ -179,34 +74,28 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
           value={formData.numOfBeings}
           placeholder="Enter the number of Beings"
           onChange={(e) => {
-            setDisabled(false);
-            setErrorLog(initialErrorLog);
-            isNumber(e.target.value)
-              ? setFormData({ ...formData, numOfBeings: e.target.value })
-              : setErrorLog({
-                  ...errorLog,
-                  errorNumOfBeings: errMsgNumOfBeings.errValidNumber,
-                });
+            setError({
+              ...error,
+              NumOfBeings: validateNumberOfBeings(e.target.value),
+            });
+            setFormData({ ...formData, numOfBeings: e.target.value });
           }}
-          errorMessage={errorLog.errorNumOfBeings}
+          onValidate={error.NumOfBeings}
         />
 
         <W12MSelect
           ariaLabel="select-what"
-          value={formData.select}
+          value={formData.twoPlusTwo}
           id="select-what"
           label="What is 2 + 2 ?"
           onChange={(e) => {
-            setDisabled(false);
-            setErrorLog(initialErrorLog);
-            e.target.value === "Not 4"
-              ? setErrorLog({
-                  ...errorLog,
-                  errorSelect: errMsgSelect.errInvalidAnswer,
-                })
-              : setFormData({ ...formData, select: e.target.value });
+            setError({
+              ...error,
+              twoPlusTwo: validateTwoPlusTwo(e.target.value),
+            });
+            setFormData({ ...formData, twoPlusTwo: e.target.value });
           }}
-          errorMessage={errorLog.errorSelect}
+          onValidate={error.twoPlusTwo}
         >
           {OPTIONS.map((option, i) => {
             return (
@@ -221,48 +110,69 @@ const W12MForm: React.FC<FormProp> = ({ onSubmit }) => {
           ariaLabel="textArea-reason"
           id="textArea-reason"
           label="Reason for sparing"
-          value={formData.text}
+          value={formData.reasonForSparing}
           placeholder="Enter the reason for sparing"
           rows={TEXTAREA_ROW_NUM}
           cols={TEXTAREA_COL_NUM}
           onChange={(e) => {
-            setDisabled(false);
-            setErrorLog(initialErrorLog);
-            setFormData({ ...formData, text: e.target.value });
+            setError({
+              ...error,
+              reasonForSparing: validateReason(e.target.value),
+            });
+            setFormData({ ...formData, reasonForSparing: e.target.value });
           }}
-          errorMessage={errorLog.errorTextArea}
+          onValidate={error.reasonForSparing}
         ></W12MTextBox>
+
         <W12MButton
           className="btn--form"
           buttonName="Submit Form"
-          disabled={disabled}
+          disabled={
+            formData.species &&
+            formData.planet &&
+            formData.numOfBeings &&
+            error.species.length === 0 &&
+            error.planet.length === 0 &&
+            error.NumOfBeings.length === 0 &&
+            error.twoPlusTwo.length === 0 &&
+            error.reasonForSparing.length === 0
+              ? false
+              : true
+          }
         />
       </form>
-      <div className={displaySubmittedMsg()}>
-        <h3>Your Submitted Data</h3>
-        <ul className="form__list">
-          <li className="form__item">
-            <span>Species Name : </span>
-            {displayData.species}
-          </li>
-          <li className="form__item">
-            <span>Planet Name : </span>
-            {displayData.planet}
-          </li>
-          <li className="form__item">
-            <span>Number of beings : </span>
-            {displayData.numOfBeings}
-          </li>
-          <li className="form__item">
-            <span>What is 2 + 2 ? </span>
-            {displayData.select}
-          </li>
-          <li className="form__item">
-            <span>Reason for sparing : </span>
-            {displayData.text}
-          </li>
-        </ul>
-      </div>
+
+      {displayData.species &&
+        displayData.planet &&
+        displayData.numOfBeings &&
+        displayData.twoPlusTwo &&
+        displayData.reasonForSparing && (
+          <div className="form__data">
+            <h3>Your Submitted Data</h3>
+            <ul className="form__list">
+              <li className="form__item">
+                <span>Species Name : </span>
+                {displayData.species}
+              </li>
+              <li className="form__item">
+                <span>Planet Name : </span>
+                {displayData.planet}
+              </li>
+              <li className="form__item">
+                <span>Number of beings : </span>
+                {displayData.numOfBeings}
+              </li>
+              <li className="form__item">
+                <span>What is 2 + 2 ? </span>
+                {displayData.twoPlusTwo}
+              </li>
+              <li className="form__item">
+                <span>Reason for sparing : </span>
+                {displayData.reasonForSparing}
+              </li>
+            </ul>
+          </div>
+        )}
     </>
   );
 };
